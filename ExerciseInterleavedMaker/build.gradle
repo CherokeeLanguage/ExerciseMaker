@@ -37,6 +37,7 @@ configurations {
 dependencies {
 	compile 'org.apache.commons:commons-lang3:+'
 	compile 'commons-io:commons-io:+'
+	compile project(":SimpleTextUi")
 }
  
 sourceSets {
@@ -87,7 +88,7 @@ eclipse {
 	project {
 		name = 'ExerciseInterleavedMaker'
 		natures 'org.springsource.ide.eclipse.gradle.core.nature'
-//		referencedProjects 'SHARED-POJOS', 'SHARED-SERVER'
+		referencedProjects 'SimpleTextUi'
 	}
 
 	classpath {

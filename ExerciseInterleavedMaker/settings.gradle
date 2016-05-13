@@ -1,2 +1,4 @@
 rootProject.name = 'ExerciseInterleavedMaker'
 
+include ":SimpleTextUi"
+project(":SimpleTextUi").projectDir=new File(settingsDir,"../../SimpleTextUi/SimpleTextUi")
