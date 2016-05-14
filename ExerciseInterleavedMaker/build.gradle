@@ -37,6 +37,10 @@ configurations {
 dependencies {
 	compile 'org.apache.commons:commons-lang3:+'
 	compile 'commons-io:commons-io:+'
+	// http://mvnrepository.com/artifact/org.jsoup/jsoup
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.9.1'
+	// http://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
 	compile project(":SimpleTextUi")
 }
  

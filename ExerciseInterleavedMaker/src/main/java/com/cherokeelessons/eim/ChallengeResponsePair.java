@@ -1,0 +1,121 @@
+package com.cherokeelessons.eim;
+
+public class ChallengeResponsePair {
+	public ChallengeResponsePair() {
+	}
+
+	public ChallengeResponsePair(ChallengeResponsePair pair) {
+		position = pair.position;
+		challenge = pair.challenge;
+		response = pair.response;
+	}
+
+	public int position;
+	public String challenge;
+	public String response;
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		String tmp_challenge = challenge != null ? challenge : "";
+		sb.append(tmp_challenge);
+		sb.append("\t");
+		String tmp_response = response != null ? response : "";
+		sb.append(tmp_response);
+		sb.append("\t");
+		sb.append(tmp_challenge);
+		sb.append(" ");
+		sb.append(tmp_response);
+		sb.append("\t");
+		sb.append(position);
+		return sb.toString();
+	}
+
+	public static enum ResponseLayout {
+		None, Enumerate, Plain, Itemize, Comma
+	}
+
+	public String toLyxCode(ResponseLayout challengesOnly) {
+		StringBuilder sb = new StringBuilder();
+		String tmp_challenge = challenge != null ? challenge : "";
+		String tmp_response = response != null ? response : "";
+
+		sb.append("\\begin_layout Enumerate\n");
+		sb.append(tmp_challenge);
+		
+		switch(challengesOnly) {
+		case Comma:
+			sb.append("\n,\n ");
+			sb.append(tmp_response);
+			sb.append("\n\\end_layout\n\n");
+			break;
+		case Enumerate:
+			sb.append("\n\\end_layout\n\n");
+			sb.append("\\begin_deeper\n");
+			sb.append("\\begin_layout Enumerate\n");
+			sb.append(tmp_response);
+			sb.append("\n\\end_layout\n\n");
+			sb.append("\\end_deeper\n");
+			break;
+		case Itemize:
+			sb.append("\n\\end_layout\n\n");
+			sb.append("\\begin_deeper\n");
+			sb.append("\\begin_layout Itemize\n");
+			sb.append(tmp_response);
+			sb.append("\n\\end_layout\n\n");
+			sb.append("\\end_deeper\n");
+			break;
+		case None:
+			sb.append("\n\\end_layout\n\n");
+			break;
+		case Plain:
+			sb.append("\n\\end_layout\n\n");
+			sb.append("\\begin_deeper\n");
+			sb.append("\\begin_layout Standard\n");
+			sb.append(tmp_response);
+			sb.append("\n\\end_layout\n\n");
+			sb.append("\\end_deeper\n");
+			break;
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((challenge == null) ? 0 : challenge.hashCode());
+		result = prime * result + ((response == null) ? 0 : response.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		ChallengeResponsePair other = (ChallengeResponsePair) obj;
+		if (challenge == null) {
+			if (other.challenge != null) {
+				return false;
+			}
+		} else if (!challenge.equals(other.challenge)) {
+			return false;
+		}
+		if (response == null) {
+			if (other.response != null) {
+				return false;
+			}
+		} else if (!response.equals(other.response)) {
+			return false;
+		}
+		return true;
+	}
+
+}
