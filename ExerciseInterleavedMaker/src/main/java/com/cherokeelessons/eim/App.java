@@ -3,12 +3,14 @@ package com.cherokeelessons.eim;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.Random;
 
 import javax.swing.filechooser.FileSystemView;
 
@@ -24,6 +26,7 @@ import com.cherokeelessons.lyx.LyxTemplate;
 public class App implements Runnable {
 	private String inFolder;
 	private String outFolder;
+	private int depth = 5;
 
 	public App(String[] args) {
 	}
@@ -52,42 +55,44 @@ public class App implements Runnable {
 			if (sort) {
 				sortChallengeResponsePairsByLengthAlpha(challenges);
 			}
-			queued = createPimsleurStyledOutput(challenges, 5);
+			queued = createPimsleurStyledOutput(challenges, depth);
 			writeChallengeResponsePairsTxt(outFile, queued);
 			writeChallengeResponsePairsLyx(lyxBaseFile, queued);
 		}
 	}
 
-	private void writeChallengeResponsePairsLyx(String lyxBaseFile, List<ChallengeResponsePair> queued) throws IOException {
-		int sets=(int) Math.ceil(queued.size()/15);
-		StringBuilder lyx_challenges_only=new StringBuilder();
+	private float maxSetSize=15;
+	private void writeChallengeResponsePairsLyx(String lyxBaseFile, List<ChallengeResponsePair> queued)
+			throws IOException {
+		int sets = (int) Math.ceil((float)queued.size() / maxSetSize);
+		StringBuilder lyx_challenges_only = new StringBuilder();
 		StringBuilder lyx_challenges_response = new StringBuilder();
-		
-		List<List<ChallengeResponsePair>> lists = ListUtils.partition(queued, queued.size()/sets);
-		
+
+		List<List<ChallengeResponsePair>> lists = ListUtils.partition(queued, queued.size() / sets);
+
 		lyx_challenges_only.append(LyxTemplate.docStart);
 		lyx_challenges_response.append(LyxTemplate.docStart);
-		
-		int section=1;
-		for (List<ChallengeResponsePair> list: lists) {
+
+		int section = 1;
+		for (List<ChallengeResponsePair> list : lists) {
 			lyx_challenges_only.append(LyxTemplate.subsubsection(section));
 			lyx_challenges_response.append(LyxTemplate.subsubsection(section));
 			lyx_challenges_only.append(LyxTemplate.multiCol2_begin);
 			lyx_challenges_response.append(LyxTemplate.multiCol2_begin);
-			for (ChallengeResponsePair pair: list) {
+			for (ChallengeResponsePair pair : list) {
 				lyx_challenges_only.append(pair.toLyxCode(ResponseLayout.None));
-				lyx_challenges_response.append(pair.toLyxCode(ResponseLayout.Comma));
+				lyx_challenges_response.append(pair.toLyxCode(ResponseLayout.SingleLine));
 			}
 			lyx_challenges_only.append(LyxTemplate.multiCol2_end);
 			lyx_challenges_response.append(LyxTemplate.multiCol2_end);
 			section++;
 		}
-		
+
 		lyx_challenges_only.append(LyxTemplate.docEnd);
 		lyx_challenges_response.append(LyxTemplate.docEnd);
-		
-		FileUtils.write(new File(lyxBaseFile+"-co.lyx"), lyx_challenges_only.toString(), "UTF-8");
-		FileUtils.write(new File(lyxBaseFile+"-cr.lyx"), lyx_challenges_response.toString(), "UTF-8");
+
+		FileUtils.write(new File(lyxBaseFile + "-co.lyx"), lyx_challenges_only.toString(), "UTF-8");
+		FileUtils.write(new File(lyxBaseFile + "-cr.lyx"), lyx_challenges_response.toString(), "UTF-8");
 	}
 
 	private void sortChallengeResponsePairsByLengthAlpha(List<ChallengeResponsePair> challenges) {
@@ -99,16 +104,55 @@ public class App implements Runnable {
 		});
 	}
 
-	private boolean sort=true;
+	public static class ReplacementSet {
+		public String field;
+		public String[] replacements;
+		public List<String> deck=new ArrayList<>();
+	}
+	private Map<String, ReplacementSet> randomReplacements = new HashMap<>();
+	private boolean sort = true;
+	private String sep=":";
 	private List<ChallengeResponsePair> parseChallengeResponsePairs(File file) throws IOException {
 		LineIterator ifile = FileUtils.lineIterator(file);
 		List<ChallengeResponsePair> list = new ArrayList<>();
 		while (ifile.hasNext()) {
 			String line = ifile.next();
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
-				if (line.contains("nosort")){
-					sort=false;
+				if (line.contains("sep=")){
+					String tmp = StringUtils.substringAfter(line, "sep=");
+					sep = StringUtils.strip(StringUtils.substringBefore(tmp, " "));
 				}
+				if (line.contains("nosort")) {
+					sort = false;
+				}
+				//maxSetSize
+				if (line.contains("setsize=")) {
+					String tmp = StringUtils.substringAfter(line, "setsize=");
+					tmp = StringUtils.substringBefore(tmp, " ");
+					try {
+						maxSetSize = Integer.valueOf(tmp);
+					} catch (NumberFormatException e) {
+					}
+				}
+				if (line.contains("depth=")) {
+					String tmp = StringUtils.substringAfter(line, "depth=");
+					tmp = StringUtils.substringBefore(tmp, " ");
+					try {
+						depth = Integer.valueOf(tmp);
+					} catch (NumberFormatException e) {
+					}
+				}
+				continue;
+			}
+			if (StringUtils.strip(line).startsWith("#random:")) {
+				String tmp = StringUtils.substringAfter(line, ":");
+				String field = StringUtils.strip(StringUtils.substringBefore(tmp, "="));
+				tmp = StringUtils.substringAfter(tmp, "=");
+				String[] values = StringUtils.split(tmp, ",");
+				ReplacementSet rset = new ReplacementSet();
+				rset.field=field;
+				rset.replacements=values;
+				randomReplacements.put("<" + field + ">", rset);
 				continue;
 			}
 			if (StringUtils.strip(line).startsWith("#")) {
@@ -123,6 +167,7 @@ public class App implements Runnable {
 			String afterTab = StringUtils.substringAfter(line, "\t");
 			pair.challenge = StringUtils.strip(beforeTab);
 			pair.response = StringUtils.strip(afterTab);
+			pair.sep = sep;
 			list.add(pair);
 		}
 		return list;
@@ -134,6 +179,7 @@ public class App implements Runnable {
 	 */
 	private List<ChallengeResponsePair> createPimsleurStyledOutput(List<ChallengeResponsePair> challenges,
 			int intervals) {
+		Random rnd = new Random(depth);
 		TimingSlots used_timing_slots = new TimingSlots();
 		List<ChallengeResponsePair> queued = new ArrayList<>();
 		for (ChallengeResponsePair pair : challenges) {
@@ -141,7 +187,7 @@ public class App implements Runnable {
 			for (int interval = 0; interval < intervals; interval++) {
 				ChallengeResponsePair new_pair = new ChallengeResponsePair(pair);
 				int seconds_start = (int) Math.pow(5, interval) + seconds_offset;
-				int length = (int) Math.ceil(new_pair.challenge.length()/5f);
+				int length = (int) Math.ceil(new_pair.challenge.length() / 5f);
 				while (used_timing_slots.isUsed(seconds_start, length)) {
 					seconds_start++;
 				}
@@ -152,34 +198,51 @@ public class App implements Runnable {
 			}
 		}
 		Collections.sort(queued, (a, b) -> a.position - b.position);
-		int maxtries=10;
+		int maxtries = 10;
 		redorder_dupes: do {
-			if (maxtries--<0) {
+			if (maxtries-- < 0) {
 				break redorder_dupes;
 			}
 			Iterator<ChallengeResponsePair> iq = queued.iterator();
-			ChallengeResponsePair prev=null;
+			ChallengeResponsePair prev = null;
 			while (iq.hasNext()) {
 				ChallengeResponsePair a = iq.next();
-				if (a.equals(prev)){
+				if (a.equals(prev)) {
 					iq.remove();
 					queued.add(a);
 					continue redorder_dupes;
 				}
-				prev=a;
+				prev = a;
 			}
 			break;
 		} while (true);
+		for (ChallengeResponsePair new_pair: queued) {
+			if (new_pair.challenge.contains("<") || new_pair.response.contains("<")) {
+				for (String field : randomReplacements.keySet()) {
+					ReplacementSet rset = randomReplacements.get(field);
+					if (rset.replacements.length == 0) {
+						continue;
+					}
+					if (rset.deck.size()==0) {
+						rset.deck.addAll(Arrays.asList(rset.replacements));
+						Collections.shuffle(rset.deck, rnd);
+					}
+					String replacement = StringUtils.strip(rset.deck.remove(0));
+					new_pair.challenge = new_pair.challenge.replace(field, replacement);
+					new_pair.response = new_pair.response.replace(field, replacement);
+				}
+			}
+		}
 		remove_dupes: {
 			Iterator<ChallengeResponsePair> iq = queued.iterator();
-			ChallengeResponsePair prev=null;
+			ChallengeResponsePair prev = null;
 			while (iq.hasNext()) {
 				ChallengeResponsePair a = iq.next();
-				if (a.equals(prev)){
+				if (a.equals(prev)) {
 					iq.remove();
 					continue;
 				}
-				prev=a;
+				prev = a;
 			}
 		}
 		return queued;

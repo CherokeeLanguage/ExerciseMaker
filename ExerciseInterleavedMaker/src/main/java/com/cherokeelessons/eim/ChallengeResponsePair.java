@@ -8,11 +8,13 @@ public class ChallengeResponsePair {
 		position = pair.position;
 		challenge = pair.challenge;
 		response = pair.response;
+		sep = pair.sep;
 	}
 
 	public int position;
 	public String challenge;
 	public String response;
+	public String sep=",";
 
 	@Override
 	public String toString() {
@@ -24,6 +26,7 @@ public class ChallengeResponsePair {
 		sb.append(tmp_response);
 		sb.append("\t");
 		sb.append(tmp_challenge);
+		sb.append(sep);
 		sb.append(" ");
 		sb.append(tmp_response);
 		sb.append("\t");
@@ -32,7 +35,7 @@ public class ChallengeResponsePair {
 	}
 
 	public static enum ResponseLayout {
-		None, Enumerate, Plain, Itemize, Comma
+		None, Enumerate, Plain, Itemize, SingleLine
 	}
 
 	public String toLyxCode(ResponseLayout challengesOnly) {
@@ -44,8 +47,8 @@ public class ChallengeResponsePair {
 		sb.append(tmp_challenge);
 		
 		switch(challengesOnly) {
-		case Comma:
-			sb.append("\n,\n ");
+		case SingleLine:
+			sb.append("\n"+sep+"\n ");
 			sb.append(tmp_response);
 			sb.append("\n\\end_layout\n\n");
 			break;
