@@ -117,6 +117,9 @@ public class App implements Runnable {
 		List<ChallengeResponsePair> list = new ArrayList<>();
 		while (ifile.hasNext()) {
 			String line = ifile.next();
+			if (StringUtils.isBlank(line)){
+				continue;
+			}
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
 				if (line.contains("sep=")){
 					String tmp = StringUtils.substringAfter(line, "sep=");
@@ -158,6 +161,7 @@ public class App implements Runnable {
 			if (StringUtils.strip(line).startsWith("#")) {
 				continue;
 			}
+			
 			if (!line.contains("\t")) {
 				System.err.println("BAD LINE (no tabs found): " + line);
 				continue;
@@ -219,6 +223,7 @@ public class App implements Runnable {
 		for (ChallengeResponsePair new_pair: queued) {
 			if (new_pair.challenge.contains("<") || new_pair.response.contains("<")) {
 				for (String field : randomReplacements.keySet()) {
+					String field_alt="<="+field.substring(1);
 					ReplacementSet rset = randomReplacements.get(field);
 					if (rset.replacements.length == 0) {
 						continue;
@@ -227,9 +232,15 @@ public class App implements Runnable {
 						rset.deck.addAll(Arrays.asList(rset.replacements));
 						Collections.shuffle(rset.deck, rnd);
 					}
-					String replacement = StringUtils.strip(rset.deck.remove(0));
-					new_pair.challenge = new_pair.challenge.replace(field, replacement);
-					new_pair.response = new_pair.response.replace(field, replacement);
+					String tmp = rset.deck.remove(0);
+					String a = StringUtils.substringBefore(tmp, "=");
+					String b = StringUtils.substringAfter(tmp, "=");
+					a=StringUtils.strip(a);
+					b=StringUtils.strip(b);
+					new_pair.challenge = new_pair.challenge.replace(field, a);
+					new_pair.challenge = new_pair.challenge.replace(field_alt, b);
+					new_pair.response = new_pair.response.replace(field, a);
+					new_pair.response = new_pair.response.replace(field_alt, b);
 				}
 			}
 		}
