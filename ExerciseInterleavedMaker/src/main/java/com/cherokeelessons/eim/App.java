@@ -27,7 +27,7 @@ public class App implements Runnable {
 	private String inFolder;
 	private String outFolder;
 	private int depth = 5;
-	private ResponseLayout layout=ResponseLayout.SingleLine;
+	private ResponseLayout layout = ResponseLayout.SingleLine;
 
 	public App(String[] args) {
 	}
@@ -57,7 +57,8 @@ public class App implements Runnable {
 				sortChallengeResponsePairsByLengthAlpha(challenges);
 			}
 			if (random) {
-				Random rnd = new Random(challenges.size());
+				int sum = challenges.stream().mapToInt(c -> c.challenge.length() + c.response.length()).sum();
+				Random rnd = new Random(challenges.size()+sum);
 				Collections.shuffle(challenges, rnd);
 			}
 			queued = createPimsleurStyledOutput(challenges, depth);
@@ -130,10 +131,10 @@ public class App implements Runnable {
 				continue;
 			}
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
-				if (line.contains("layout=")){
+				if (line.contains("layout=")) {
 					String tmp = StringUtils.substringAfter(line, "layout=");
 					tmp = StringUtils.strip(tmp);
-					layout=ResponseLayout.valueOf(tmp);
+					layout = ResponseLayout.valueOf(tmp);
 				}
 				if (line.contains("sep=")) {
 					String tmp = StringUtils.substringAfter(line, "sep=");
@@ -202,7 +203,6 @@ public class App implements Runnable {
 	 */
 	private List<ChallengeResponsePair> createPimsleurStyledOutput(List<ChallengeResponsePair> challenges,
 			int intervals) {
-		Random rnd = new Random(depth);
 		TimingSlots used_timing_slots = new TimingSlots();
 		List<ChallengeResponsePair> queued = new ArrayList<>();
 		for (ChallengeResponsePair pair : challenges) {
@@ -239,41 +239,47 @@ public class App implements Runnable {
 			}
 			break;
 		} while (true);
+		Random rnd = new Random(depth + challenges.size());
 		for (ChallengeResponsePair new_pair : queued) {
-			if (new_pair.challenge.contains("<") || new_pair.response.contains("<")) {
-				for (String field : randomReplacements.keySet()) {
-					String field_alt = "<=" + field.substring(1);
-					ReplacementSet rset = randomReplacements.get(field);
-					if (rset.replacements.length == 0) {
-						continue;
-					}
-					if (rset.deck.size() == 0) {
-						rset.deck.addAll(Arrays.asList(rset.replacements));
-						Collections.shuffle(rset.deck, rnd);
-					}
-					String tmp = rset.deck.remove(0);
-					String a = StringUtils.substringBefore(tmp, "=");
-					String b = StringUtils.substringAfter(tmp, "=");
-					a = StringUtils.strip(a);
-					b = StringUtils.strip(b);
-					new_pair.challenge = new_pair.challenge.replace(field, a);
-					new_pair.challenge = new_pair.challenge.replace(field_alt, b);
-					new_pair.response = new_pair.response.replace(field, a);
-					new_pair.response = new_pair.response.replace(field_alt, b);
+			nextfield: for (String field : randomReplacements.keySet()) {
+				String field_alt = "<=" + field.substring(1);
+				if (!new_pair.challenge.contains(field) //
+						&& !new_pair.response.contains(field) //
+						&& !new_pair.challenge.contains(field_alt) //
+						&& !new_pair.response.contains(field_alt)) {
+					continue nextfield;
 				}
+				ReplacementSet rset = randomReplacements.get(field);
+				if (rset.replacements.length == 0) {
+					continue nextfield;
+				}
+				if (rset.deck.size() == 0) {
+					rset.deck.addAll(Arrays.asList(rset.replacements));
+					Collections.shuffle(rset.deck, rnd);
+				}
+				String tmp = rset.deck.remove(0);
+				String a = StringUtils.substringBefore(tmp, "=");
+				String b = StringUtils.substringAfter(tmp, "=");
+				a = StringUtils.strip(a);
+				b = StringUtils.strip(b);
+				new_pair.challenge = new_pair.challenge.replace(field, a);
+				new_pair.challenge = new_pair.challenge.replace(field_alt, b);
+				new_pair.response = new_pair.response.replace(field, a);
+				new_pair.response = new_pair.response.replace(field_alt, b);
 			}
 		}
-		remove_dupes: {
-			Iterator<ChallengeResponsePair> iq = queued.iterator();
-			ChallengeResponsePair prev = null;
-			while (iq.hasNext()) {
-				ChallengeResponsePair a = iq.next();
-				if (a.equals(prev)) {
-					iq.remove();
-					continue;
-				}
-				prev = a;
+		/**
+		 * Remove back-to-back duplicates.
+		 */
+		Iterator<ChallengeResponsePair> iq = queued.iterator();
+		ChallengeResponsePair prev = null;
+		while (iq.hasNext()) {
+			ChallengeResponsePair a = iq.next();
+			if (a.equals(prev)) {
+				iq.remove();
+				continue;
 			}
+			prev = a;
 		}
 		return queued;
 	}
