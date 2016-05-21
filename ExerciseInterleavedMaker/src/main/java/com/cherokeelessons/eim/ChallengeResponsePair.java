@@ -55,17 +55,21 @@ public class ChallengeResponsePair {
 		case Enumerate:
 			sb.append("\n\\end_layout\n\n");
 			sb.append("\\begin_deeper\n");
-			sb.append("\\begin_layout Enumerate\n");
-			sb.append(tmp_response);
-			sb.append("\n\\end_layout\n\n");
+			for (String t: tmp_response.split("\t")) {
+				sb.append("\\begin_layout Enumerate\n");
+				sb.append(t);
+				sb.append("\n\\end_layout\n\n");
+			}
 			sb.append("\\end_deeper\n");
 			break;
 		case Itemize:
 			sb.append("\n\\end_layout\n\n");
 			sb.append("\\begin_deeper\n");
-			sb.append("\\begin_layout Itemize\n");
-			sb.append(tmp_response);
-			sb.append("\n\\end_layout\n\n");
+			for (String t: tmp_response.split("\t")) {
+				sb.append("\\begin_layout Itemize\n");
+				sb.append(t);
+				sb.append("\n\\end_layout\n\n");
+			}
 			sb.append("\\end_deeper\n");
 			break;
 		case None:

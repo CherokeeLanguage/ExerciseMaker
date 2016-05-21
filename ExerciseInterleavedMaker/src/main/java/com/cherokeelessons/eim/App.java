@@ -27,6 +27,7 @@ public class App implements Runnable {
 	private String inFolder;
 	private String outFolder;
 	private int depth = 5;
+	private ResponseLayout layout=ResponseLayout.SingleLine;
 
 	public App(String[] args) {
 	}
@@ -55,16 +56,21 @@ public class App implements Runnable {
 			if (sort) {
 				sortChallengeResponsePairsByLengthAlpha(challenges);
 			}
+			if (random) {
+				Random rnd = new Random(challenges.size());
+				Collections.shuffle(challenges, rnd);
+			}
 			queued = createPimsleurStyledOutput(challenges, depth);
 			writeChallengeResponsePairsTxt(outFile, queued);
 			writeChallengeResponsePairsLyx(lyxBaseFile, queued);
 		}
 	}
 
-	private float maxSetSize=15;
+	private float maxSetSize = 15;
+
 	private void writeChallengeResponsePairsLyx(String lyxBaseFile, List<ChallengeResponsePair> queued)
 			throws IOException {
-		int sets = (int) Math.ceil((float)queued.size() / maxSetSize);
+		int sets = (int) Math.ceil((float) queued.size() / maxSetSize);
 		StringBuilder lyx_challenges_only = new StringBuilder();
 		StringBuilder lyx_challenges_response = new StringBuilder();
 
@@ -81,7 +87,7 @@ public class App implements Runnable {
 			lyx_challenges_response.append(LyxTemplate.multiCol2_begin);
 			for (ChallengeResponsePair pair : list) {
 				lyx_challenges_only.append(pair.toLyxCode(ResponseLayout.None));
-				lyx_challenges_response.append(pair.toLyxCode(ResponseLayout.SingleLine));
+				lyx_challenges_response.append(pair.toLyxCode(layout));
 			}
 			lyx_challenges_only.append(LyxTemplate.multiCol2_end);
 			lyx_challenges_response.append(LyxTemplate.multiCol2_end);
@@ -107,28 +113,41 @@ public class App implements Runnable {
 	public static class ReplacementSet {
 		public String field;
 		public String[] replacements;
-		public List<String> deck=new ArrayList<>();
+		public List<String> deck = new ArrayList<>();
 	}
+
 	private Map<String, ReplacementSet> randomReplacements = new HashMap<>();
 	private boolean sort = true;
-	private String sep=":";
+	private boolean random = false;
+	private String sep = ":";
+
 	private List<ChallengeResponsePair> parseChallengeResponsePairs(File file) throws IOException {
 		LineIterator ifile = FileUtils.lineIterator(file);
 		List<ChallengeResponsePair> list = new ArrayList<>();
 		while (ifile.hasNext()) {
 			String line = ifile.next();
-			if (StringUtils.isBlank(line)){
+			if (StringUtils.isBlank(line)) {
 				continue;
 			}
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
-				if (line.contains("sep=")){
+				if (line.contains("layout=")){
+					String tmp = StringUtils.substringAfter(line, "layout=");
+					tmp = StringUtils.strip(tmp);
+					layout=ResponseLayout.valueOf(tmp);
+				}
+				if (line.contains("sep=")) {
 					String tmp = StringUtils.substringAfter(line, "sep=");
 					sep = StringUtils.strip(StringUtils.substringBefore(tmp, " "));
 				}
 				if (line.contains("nosort")) {
 					sort = false;
 				}
-				//maxSetSize
+				if (line.contains("random")) {
+					random = true;
+					sort = false;
+					depth = 1;
+				}
+				// maxSetSize
 				if (line.contains("setsize=")) {
 					String tmp = StringUtils.substringAfter(line, "setsize=");
 					tmp = StringUtils.substringBefore(tmp, " ");
@@ -153,15 +172,15 @@ public class App implements Runnable {
 				tmp = StringUtils.substringAfter(tmp, "=");
 				String[] values = StringUtils.split(tmp, ",");
 				ReplacementSet rset = new ReplacementSet();
-				rset.field=field;
-				rset.replacements=values;
+				rset.field = field;
+				rset.replacements = values;
 				randomReplacements.put("<" + field + ">", rset);
 				continue;
 			}
 			if (StringUtils.strip(line).startsWith("#")) {
 				continue;
 			}
-			
+
 			if (!line.contains("\t")) {
 				System.err.println("BAD LINE (no tabs found): " + line);
 				continue;
@@ -220,23 +239,23 @@ public class App implements Runnable {
 			}
 			break;
 		} while (true);
-		for (ChallengeResponsePair new_pair: queued) {
+		for (ChallengeResponsePair new_pair : queued) {
 			if (new_pair.challenge.contains("<") || new_pair.response.contains("<")) {
 				for (String field : randomReplacements.keySet()) {
-					String field_alt="<="+field.substring(1);
+					String field_alt = "<=" + field.substring(1);
 					ReplacementSet rset = randomReplacements.get(field);
 					if (rset.replacements.length == 0) {
 						continue;
 					}
-					if (rset.deck.size()==0) {
+					if (rset.deck.size() == 0) {
 						rset.deck.addAll(Arrays.asList(rset.replacements));
 						Collections.shuffle(rset.deck, rnd);
 					}
 					String tmp = rset.deck.remove(0);
 					String a = StringUtils.substringBefore(tmp, "=");
 					String b = StringUtils.substringAfter(tmp, "=");
-					a=StringUtils.strip(a);
-					b=StringUtils.strip(b);
+					a = StringUtils.strip(a);
+					b = StringUtils.strip(b);
 					new_pair.challenge = new_pair.challenge.replace(field, a);
 					new_pair.challenge = new_pair.challenge.replace(field_alt, b);
 					new_pair.response = new_pair.response.replace(field, a);
