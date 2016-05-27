@@ -239,7 +239,8 @@ public class App implements Runnable {
 			}
 			break;
 		} while (true);
-		Random rnd = new Random(depth + challenges.size());
+		int length = challenges.stream().mapToInt(c->c.challenge.length()+c.response.length()).sum();
+		Random rnd = new Random(depth + challenges.size() + length);
 		for (ChallengeResponsePair new_pair : queued) {
 			nextfield: for (String field : randomReplacements.keySet()) {
 				String field_alt = "<=" + field.substring(1);
