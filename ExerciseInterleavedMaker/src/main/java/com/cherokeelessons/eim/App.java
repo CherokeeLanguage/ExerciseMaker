@@ -133,6 +133,8 @@ public class App implements Runnable {
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
 				if (line.contains("layout=")) {
 					String tmp = StringUtils.substringAfter(line, "layout=");
+					tmp=StringUtils.strip(tmp);
+					tmp=StringUtils.substringBefore(tmp, " ");
 					tmp = StringUtils.strip(tmp);
 					layout = ResponseLayout.valueOf(tmp);
 				}
