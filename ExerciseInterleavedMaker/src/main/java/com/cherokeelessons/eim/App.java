@@ -57,8 +57,8 @@ public class App implements Runnable {
 				sortChallengeResponsePairsByLengthAlpha(challenges);
 			}
 			if (random) {
-				int sum = challenges.stream().mapToInt(c -> c.challenge.length() + c.response.length()).sum();
-				Random rnd = new Random(challenges.size()+sum);
+				int length = challenges.stream().mapToInt(c -> c.challenge.length() + c.response.length()).sum();
+				Random rnd = new Random(challenges.size() + length);
 				Collections.shuffle(challenges, rnd);
 			}
 			queued = createPimsleurStyledOutput(challenges, depth);
@@ -239,7 +239,7 @@ public class App implements Runnable {
 			}
 			break;
 		} while (true);
-		int length = challenges.stream().mapToInt(c->c.challenge.length()+c.response.length()).sum();
+		int length = challenges.stream().mapToInt(c -> c.challenge.length() + c.response.length()).sum();
 		Random rnd = new Random(depth + challenges.size() + length);
 		for (ChallengeResponsePair new_pair : queued) {
 			nextfield: for (String field : randomReplacements.keySet()) {
