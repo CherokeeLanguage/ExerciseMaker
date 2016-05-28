@@ -27,8 +27,27 @@ public class App implements Runnable {
 	private String inFolder;
 	private String outFolder;
 	private int depth = 5;
+	private int maxsets = 0;
 	private ResponseLayout layout = ResponseLayout.SingleLine;
+	private boolean includeRerversed = false;
+	private float maxSetSize = 15;
+	private Map<String, ReplacementSet> randomReplacements = new HashMap<>();
+	private boolean sort = true;
+	private boolean random = false;
+	private String sep = ":";
 
+	private void setDefaults(){
+		depth = 5;
+		maxsets = 0;
+		layout = ResponseLayout.SingleLine;
+		includeRerversed = false;
+		randomReplacements.clear();
+		sort=true;
+		random=false;
+		sep=":";
+		maxSetSize=15;
+	}
+	
 	public App(String[] args) {
 	}
 
@@ -50,9 +69,21 @@ public class App implements Runnable {
 
 		Collection<File> files = FileUtils.listFiles(new File(inFolder), null, false);
 		for (File file : files) {
+			setDefaults();
 			File outFile = new File(outFolder, file.getName());
 			String lyxBaseFile = new File(outFolder, FilenameUtils.getBaseName(file.getName())).getAbsolutePath();
 			challenges = parseChallengeResponsePairs(file);
+			if (includeRerversed){
+				List<ChallengeResponsePair> tmp=new ArrayList<>();
+				challenges.forEach(pair->{
+					ChallengeResponsePair newPair = new ChallengeResponsePair(pair);
+					String t = newPair.challenge;
+					newPair.challenge=newPair.response;
+					newPair.response=t;
+					tmp.add(newPair);
+				});
+				challenges.addAll(tmp);
+			}
 			if (sort) {
 				sortChallengeResponsePairsByLengthAlpha(challenges);
 			}
@@ -67,16 +98,22 @@ public class App implements Runnable {
 		}
 	}
 
-	private float maxSetSize = 15;
-
 	private void writeChallengeResponsePairsLyx(String lyxBaseFile, List<ChallengeResponsePair> queued)
 			throws IOException {
-		int sets = (int) Math.ceil((float) queued.size() / maxSetSize);
+		
+		double sets = Math.ceil((float) queued.size() / maxSetSize);
+		int countPerSet = (int)Math.ceil((double)queued.size() / sets);
+		List<List<ChallengeResponsePair>> lists = ListUtils.partition(queued,countPerSet);
+
 		StringBuilder lyx_challenges_only = new StringBuilder();
 		StringBuilder lyx_challenges_response = new StringBuilder();
 
-		List<List<ChallengeResponsePair>> lists = ListUtils.partition(queued, queued.size() / sets);
-
+		if (maxsets>0) {
+			if (lists.size()>maxsets) {
+				lists.subList(maxsets, lists.size()).clear();
+			}
+		}
+		
 		lyx_challenges_only.append(LyxTemplate.docStart);
 		lyx_challenges_response.append(LyxTemplate.docStart);
 
@@ -117,11 +154,6 @@ public class App implements Runnable {
 		public List<String> deck = new ArrayList<>();
 	}
 
-	private Map<String, ReplacementSet> randomReplacements = new HashMap<>();
-	private boolean sort = true;
-	private boolean random = false;
-	private String sep = ":";
-
 	private List<ChallengeResponsePair> parseChallengeResponsePairs(File file) throws IOException {
 		LineIterator ifile = FileUtils.lineIterator(file);
 		List<ChallengeResponsePair> list = new ArrayList<>();
@@ -131,6 +163,9 @@ public class App implements Runnable {
 				continue;
 			}
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
+				if (line.contains("include-reversed")){
+					includeRerversed=true;
+				}
 				if (line.contains("layout=")) {
 					String tmp = StringUtils.substringAfter(line, "layout=");
 					tmp=StringUtils.strip(tmp);
@@ -164,6 +199,14 @@ public class App implements Runnable {
 					tmp = StringUtils.substringBefore(tmp, " ");
 					try {
 						depth = Integer.valueOf(tmp);
+					} catch (NumberFormatException e) {
+					}
+				}
+				if (line.contains("maxsets=")) {
+					String tmp = StringUtils.substringAfter(line, "maxsets=");
+					tmp = StringUtils.substringBefore(tmp, " ");
+					try {
+						maxsets = Integer.valueOf(tmp);
 					} catch (NumberFormatException e) {
 					}
 				}
