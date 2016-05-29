@@ -67,12 +67,16 @@ public class App implements Runnable {
 		List<ChallengeResponsePair> challenges;
 		List<ChallengeResponsePair> queued;
 
-		Collection<File> files = FileUtils.listFiles(new File(inFolder), null, false);
+		Collection<File> cfiles = FileUtils.listFiles(new File(inFolder), null, false);
+		List<File> files = new ArrayList<>(cfiles);
+		Collections.sort(files);
 		for (File file : files) {
+			System.out.println("File: "+file.getName());
 			setDefaults();
 			File outFile = new File(outFolder, file.getName());
 			String lyxBaseFile = new File(outFolder, FilenameUtils.getBaseName(file.getName())).getAbsolutePath();
 			challenges = parseChallengeResponsePairs(file);
+			System.out.println("\tLoaded "+challenges.size()+" challenges.");
 			if (includeRerversed){
 				List<ChallengeResponsePair> tmp=new ArrayList<>();
 				challenges.forEach(pair->{
@@ -101,17 +105,18 @@ public class App implements Runnable {
 	private void writeChallengeResponsePairsLyx(String lyxBaseFile, List<ChallengeResponsePair> queued)
 			throws IOException {
 		
+		System.out.println("Queued: "+queued.size());
 		double sets = Math.ceil((float) queued.size() / maxSetSize);
+		System.out.println("\tSets: "+sets);
 		int countPerSet = (int)Math.ceil((double)queued.size() / sets);
+		System.out.println("\tPer set: "+countPerSet);
 		List<List<ChallengeResponsePair>> lists = ListUtils.partition(queued,countPerSet);
 
 		StringBuilder lyx_challenges_only = new StringBuilder();
 		StringBuilder lyx_challenges_response = new StringBuilder();
 
 		if (maxsets>0) {
-			if (lists.size()>maxsets) {
-				lists.subList(maxsets, lists.size()).clear();
-			}
+			lists=lists.subList(0, maxsets);
 		}
 		
 		lyx_challenges_only.append(LyxTemplate.docStart);
