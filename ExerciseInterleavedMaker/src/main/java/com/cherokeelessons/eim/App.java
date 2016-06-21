@@ -26,29 +26,9 @@ import com.cherokeelessons.lyx.LyxTemplate;
 public class App implements Runnable {
 	private String inFolder;
 	private String outFolder;
-	private int depth = 5;
-	private int maxsets = 0;
-	private ResponseLayout layout = ResponseLayout.SingleLine;
-	private boolean includeRerversed = false;
-	private boolean onlyRerversed = false;
-	private float maxSetSize = 15;
 	private Map<String, ReplacementSet> randomReplacements = new HashMap<>();
-	private boolean sort = true;
-	private boolean random = false;
-	private String sep = ":";
+	private Pragma pragma = null;
 
-	private void setDefaults(){
-		depth = 5;
-		maxsets = 0;
-		layout = ResponseLayout.SingleLine;
-		includeRerversed = false;
-		randomReplacements.clear();
-		sort=true;
-		random=false;
-		sep=":";
-		maxSetSize=15;
-	}
-	
 	public App(String[] args) {
 	}
 
@@ -72,13 +52,13 @@ public class App implements Runnable {
 		List<File> files = new ArrayList<>(cfiles);
 		Collections.sort(files);
 		for (File file : files) {
+			pragma=new Pragma();
 			System.out.println("File: "+file.getName());
-			setDefaults();
 			File outFile = new File(outFolder, file.getName());
 			String lyxBaseFile = new File(outFolder, FilenameUtils.getBaseName(file.getName())).getAbsolutePath();
 			challenges = parseChallengeResponsePairs(file);
 			System.out.println("\tLoaded "+challenges.size()+" challenges.");
-			if (includeRerversed||onlyRerversed){
+			if (pragma.isIncludeRerversed()||pragma.isOnlyRerversed()){
 				List<ChallengeResponsePair> tmp=new ArrayList<>();
 				challenges.forEach(pair->{
 					ChallengeResponsePair newPair = new ChallengeResponsePair(pair);
@@ -87,20 +67,20 @@ public class App implements Runnable {
 					newPair.response=t;
 					tmp.add(newPair);
 				});
-				if (onlyRerversed) {
+				if (pragma.isOnlyRerversed()) {
 					challenges.clear();
 				}
 				challenges.addAll(tmp);
 			}			
-			if (sort) {
+			if (pragma.isSort()) {
 				sortChallengeResponsePairsByLengthAlpha(challenges);
 			}
-			if (random) {
+			if (pragma.isRandom()) {
 				int length = challenges.stream().mapToInt(c -> c.challenge.length()*2 + c.response.length()*3).sum();
 				Random rnd = new Random(challenges.size() + length);
 				Collections.shuffle(challenges, rnd);
 			}
-			queued = createPimsleurStyledOutput(challenges, depth);
+			queued = createPimsleurStyledOutput(challenges, pragma.getDepth());
 			writeChallengeResponsePairsTxt(outFile, queued);
 			writeChallengeResponsePairsLyx(lyxBaseFile, queued);
 		}
@@ -110,7 +90,7 @@ public class App implements Runnable {
 			throws IOException {
 		
 		System.out.println("Queued: "+queued.size());
-		double sets = Math.ceil((float) queued.size() / maxSetSize);
+		double sets = Math.ceil((float) queued.size() / pragma.getMaxSetSize());
 		System.out.println("\tSets: "+sets);
 		int countPerSet = (int)Math.ceil((double)queued.size() / sets);
 		System.out.println("\tPer set: "+countPerSet);
@@ -119,8 +99,8 @@ public class App implements Runnable {
 		StringBuilder lyx_challenges_only = new StringBuilder();
 		StringBuilder lyx_challenges_response = new StringBuilder();
 
-		if (maxsets>0) {
-			lists=lists.subList(0, maxsets);
+		if (pragma.getMaxsets()>0) {
+			lists=lists.subList(0, pragma.getMaxsets());
 		}
 		
 		lyx_challenges_only.append(LyxTemplate.docStart);
@@ -134,7 +114,7 @@ public class App implements Runnable {
 			lyx_challenges_response.append(LyxTemplate.multiCol2_begin);
 			for (ChallengeResponsePair pair : list) {
 				lyx_challenges_only.append(pair.toLyxCode(ResponseLayout.None));
-				lyx_challenges_response.append(pair.toLyxCode(layout));
+				lyx_challenges_response.append(pair.toLyxCode(pragma.getLayout()));
 			}
 			lyx_challenges_only.append(LyxTemplate.multiCol2_end);
 			lyx_challenges_response.append(LyxTemplate.multiCol2_end);
@@ -173,36 +153,36 @@ public class App implements Runnable {
 			}
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
 				if (line.contains("include-reversed")){
-					includeRerversed=true;
+					pragma.setIncludeRerversed(true);
 				}
 				if (line.contains("only-reversed")){
-					onlyRerversed=true;
+					pragma.setOnlyRerversed(true);
 				}
 				if (line.contains("layout=")) {
 					String tmp = StringUtils.substringAfter(line, "layout=");
 					tmp=StringUtils.strip(tmp);
 					tmp=StringUtils.substringBefore(tmp, " ");
 					tmp = StringUtils.strip(tmp);
-					layout = ResponseLayout.valueOf(tmp);
+					pragma.setLayout(ResponseLayout.valueOf(tmp));
 				}
 				if (line.contains("sep=")) {
 					String tmp = StringUtils.substringAfter(line, "sep=");
-					sep = StringUtils.strip(StringUtils.substringBefore(tmp, " "));
+					pragma.setSep(StringUtils.strip(StringUtils.substringBefore(tmp, " ")));
 				}
 				if (line.contains("nosort")) {
-					sort = false;
+					pragma.setSort(false);
 				}
 				if (line.contains("random")) {
-					random = true;
-					sort = false;
-					depth = 1;
+					pragma.setRandom(true);
+					pragma.setSort(false);
+					pragma.setDepth(1);
 				}
 				// maxSetSize
 				if (line.contains("setsize=")) {
 					String tmp = StringUtils.substringAfter(line, "setsize=");
 					tmp = StringUtils.substringBefore(tmp, " ");
 					try {
-						maxSetSize = Integer.valueOf(tmp);
+						pragma.setMaxSetSize(Integer.valueOf(tmp));
 					} catch (NumberFormatException e) {
 					}
 				}
@@ -210,7 +190,7 @@ public class App implements Runnable {
 					String tmp = StringUtils.substringAfter(line, "depth=");
 					tmp = StringUtils.substringBefore(tmp, " ");
 					try {
-						depth = Integer.valueOf(tmp);
+						pragma.setDepth(Integer.valueOf(tmp));
 					} catch (NumberFormatException e) {
 					}
 				}
@@ -218,7 +198,7 @@ public class App implements Runnable {
 					String tmp = StringUtils.substringAfter(line, "maxsets=");
 					tmp = StringUtils.substringBefore(tmp, " ");
 					try {
-						maxsets = Integer.valueOf(tmp);
+						pragma.setMaxsets(Integer.valueOf(tmp));
 					} catch (NumberFormatException e) {
 					}
 				}
@@ -248,7 +228,7 @@ public class App implements Runnable {
 			String afterTab = StringUtils.substringAfter(line, "\t");
 			pair.challenge = StringUtils.strip(beforeTab);
 			pair.response = StringUtils.strip(afterTab);
-			pair.sep = sep;
+			pair.sep = pragma.getSep();
 			list.add(pair);
 		}
 		return list;
@@ -297,7 +277,7 @@ public class App implements Runnable {
 			break;
 		} while (true);
 		int length = challenges.stream().mapToInt(c -> c.challenge.length() + c.response.length()).sum();
-		Random rnd = new Random(depth + challenges.size() + length);
+		Random rnd = new Random(pragma.getDepth() + challenges.size() + length);
 		for (ChallengeResponsePair new_pair : queued) {
 			nextfield: for (String field : randomReplacements.keySet()) {
 				String field_alt = "<=" + field.substring(1);
