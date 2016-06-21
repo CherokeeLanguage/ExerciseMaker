@@ -30,6 +30,7 @@ public class App implements Runnable {
 	private int maxsets = 0;
 	private ResponseLayout layout = ResponseLayout.SingleLine;
 	private boolean includeRerversed = false;
+	private boolean onlyRerversed = false;
 	private float maxSetSize = 15;
 	private Map<String, ReplacementSet> randomReplacements = new HashMap<>();
 	private boolean sort = true;
@@ -77,7 +78,7 @@ public class App implements Runnable {
 			String lyxBaseFile = new File(outFolder, FilenameUtils.getBaseName(file.getName())).getAbsolutePath();
 			challenges = parseChallengeResponsePairs(file);
 			System.out.println("\tLoaded "+challenges.size()+" challenges.");
-			if (includeRerversed){
+			if (includeRerversed||onlyRerversed){
 				List<ChallengeResponsePair> tmp=new ArrayList<>();
 				challenges.forEach(pair->{
 					ChallengeResponsePair newPair = new ChallengeResponsePair(pair);
@@ -86,13 +87,16 @@ public class App implements Runnable {
 					newPair.response=t;
 					tmp.add(newPair);
 				});
+				if (onlyRerversed) {
+					challenges.clear();
+				}
 				challenges.addAll(tmp);
-			}
+			}			
 			if (sort) {
 				sortChallengeResponsePairsByLengthAlpha(challenges);
 			}
 			if (random) {
-				int length = challenges.stream().mapToInt(c -> c.challenge.length() + c.response.length()).sum();
+				int length = challenges.stream().mapToInt(c -> c.challenge.length()*2 + c.response.length()*3).sum();
 				Random rnd = new Random(challenges.size() + length);
 				Collections.shuffle(challenges, rnd);
 			}
@@ -170,6 +174,9 @@ public class App implements Runnable {
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
 				if (line.contains("include-reversed")){
 					includeRerversed=true;
+				}
+				if (line.contains("only-reversed")){
+					onlyRerversed=true;
 				}
 				if (line.contains("layout=")) {
 					String tmp = StringUtils.substringAfter(line, "layout=");
