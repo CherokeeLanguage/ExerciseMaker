@@ -1,0 +1,62 @@
+#pragma: setsize=8 layout=Enumerate depth=1 random maxsets=4
+#random: h=ᎠᎨᏯ=woman, ᎠᏍᎦᏯ=man
+#random: a=ᎩᏟ=dog, ᏪᏌ=cat
+#random: is1=ᏄᎾ=potato, ᏅᏯ=rock
+#random: is2=ᏄᎾ=potato, ᏅᏯ=rock
+#random: hp=ᎠᏂᎨᏯ=women, ᎠᏂᏍᎦᏯ=men
+#random: ap=ᎩᏟ=dogs, ᏪᏌ=cats
+#random: ip1=ᏄᎾ=potatoes, ᏅᏯ=rocks
+#random: ip2=ᏄᎾ=potatoes, ᏅᏯ=rocks
+#random: ca1=ᎠᏂᏔᎵ=two, ᎠᏂᏦᎢ=three, ᏅᎩ=four, ᎯᏍᎩ=five, ᏑᏓᎵ=six, ᎦᎵᏉᎩ=seven
+#random: ci=ᏔᎵ=two, ᏦᎢ=three, ᏅᎩ=four, ᎯᏍᎩ=five, ᏑᏓᎵ=six, ᎦᎵᏉᎩ=seven
+
+<h> <a> ᎠᎪᏩᏘᎭ.	The <=h> sees a <=a>.
+<a> <h> ᎠᎪᏩᏘᎭ.	The <=a> sees a <=h>.
+<h> <is2> ᎠᎪᏩᏘᎭ.	The <=h> sees a <=is2>.
+
+<hp> <a> ᎠᏂᎪᏩᏘᎭ.	The <=hp> see a <=a>.
+<ap> <h> ᎠᏂᎪᏩᏘᎭ.	The <=ap> see a <=h>.
+<hp> <is2> ᎠᏂᎪᏩᏘᎭ.	The <=hp> see a <=is2>.
+
+<ca1> <hp> <a> ᎠᏂᎪᏩᏘᎭ.	The <=ca1> <=hp> see a <=a>.
+
+<h> <ap> ᏓᎪᏩᏘᎭ.	The <=h> sees <=ap>.
+<a> <hp> ᏓᎪᏩᏘᎭ.	The <=a> sees <=hp>.
+<h> <ip2> ᏓᎪᏩᏘᎭ.	The <=h> sees <=ip2>.
+
+<h> <ca1> <ap> ᏓᎪᏩᏘᎭ.	The <=h> sees <=ca1> <=ap>.
+<a> <ca1> <hp> ᏓᎪᏩᏘᎭ.	The <=a> sees <=ca1> <=hp>.
+<h> <ci> <ip2> ᏓᎪᏩᏘᎭ.	The <=h> sees <=ci> <=ip2>.
+
+<hp> <ap> ᏓᏂᎪᏩᏘᎭ.	The <=hp> see <=ap>.
+<ap> <hp> ᏓᏂᎪᏩᏘᎭ.	The <=ap> see <=hp>.
+<hp> <ip2> ᏓᏂᎪᏩᏘᎭ.	The <=hp> see <=ip2>.
+
+<ca1> <hp> <ca1> <ap> ᏓᏂᎪᏩᏘᎭ.	The <=ca1> <=hp> see <=ca1> <=ap>.
+<ca1> <ap> <ca1> <hp> ᏓᏂᎪᏩᏘᎭ.	The <=ca1> <=ap> see <=ca1> <=hp>.
+<ca1> <hp> <ci> <ip2> ᏓᏂᎪᏩᏘᎭ.	The <=ca1> <=hp> see <=ci> <=ip2>.
+
+<h> ᏥᎪᏩᏘᎭ.	I see a <=h>.
+<a> ᏥᎪᏩᏘᎭ.	I see a <=a>.
+<is2> Ꮵ̣ᎪᏩᏘᎭ.	I see a <=is2>.
+
+<hp> ᎦᏥᎪᏩᏘᎭ.	I see <=hp>.
+<ap> ᎦᏥᎪᏩᏘᎭ.	I see <=ap>.
+<ip2> ᏕᏥ̣ᎪᏩᏘᎭ.	I see <=ip2>.
+
+<ca1> <hp> ᎦᏥᎪᏩᏘᎭ.	I see <=ca1> <=hp>.
+<ca1> <ap> ᎦᏥᎪᏩᏘᎭ.	I see <=ca1> <=ap>.
+<ci> <ip2> ᏕᏥ̣ᎪᏩᏘᎭ.	I see <=ci> <=ip2>.
+
+<h> ᎯᎪᏩᏘᎭ.	You see a <=h>.
+<a> ᎯᎪᏩᏘᎭ.	You see a <=a>.
+<is2> Ꭿ̣ᎪᏩᏘᎭ.	You see a <=is2>.
+
+<hp> ᎦᎯᎪᏩᏘᎭ.	You see <=hp>.
+<ap> ᎦᎯᎪᏩᏘᎭ.	You see <=ap>.
+<ip2> ᏕᎯ̣ᎪᏩᏘᎭ.	You see <=ip2>.
+
+<ca1> <hp> ᎦᎯᎪᏩᏘᎭ.	You see <=ca1> <=hp>.
+<ca1> <ap> ᎦᎯᎪᏩᏘᎭ.	You see <=ca1> <=ap>.
+<ci> <ip2> ᏕᎯ̣ᎪᏩᏘᎭ.	You see <=ci> <=ip2>.
+

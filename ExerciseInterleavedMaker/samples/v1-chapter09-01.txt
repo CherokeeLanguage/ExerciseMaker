@@ -1,0 +1,106 @@
+#pragma: setsize=10 layout=Enumerate depth=3 maxsets=4
+#random: as1=ᎠᎨᏯ, ᎠᏍᎦᏯ, ᎩᏟ, ᏪᏌ, ᎠᏫ, ᎠᎭᏫ, ᏩᎭᏯ, ᏩᏯ, ᏥᏍᏚ
+#random: ax1=ᎠᎨᏯ, ᎠᏫ, ᎠᎭᏫ, ᏥᏍᏚ, ᏙᏯ
+#random: ax2=ᎩᏟ, ᏪᏌ, ᎠᏍᎦᏯ, ᏩᎭᏯ, ᏩᏯ
+#random: ga1=ᎣᏍᏓ ᎠᎨᏯ, ᎣᏍᏓ ᎠᏍᎦᏯ, ᎣᏍᏓ ᎩᏟ, ᎣᏍᏓ ᏪᏌ, ᎣᏍᏓ ᎠᏫ, ᎣᏍᏓ ᎠᎭᏫ, ᎣᏍᏓ ᏩᎭᏯ, ᎣᏍᏓ ᏩᏯ, ᎣᏍᏓ ᏥᏍᏚ
+#random: ba1=ᎤᏲᎢ ᎠᎨᏯ, ᎤᏲᎢ ᎠᏍᎦᏯ, ᎤᏲᎢ ᎩᏟ, ᎤᏲᎢ ᏪᏌ, ᎤᏲᎢ ᎠᏫ, ᎤᏲᎢ ᎠᎭᏫ, ᎤᏲᎢ ᏩᎭᏯ, ᎤᏲᎢ ᏩᏯ, ᎤᏲᎢ ᏥᏍᏚ
+#random: ap1=ᎠᏂᎨᏯ, ᎠᏂᏍᎦᏯ, ᎩᏟ, ᏪᏌ, ᎠᏫ, ᎠᎭᏫ, ᏩᏯ, ᏩᎭᏯ, ᏥᏍᏚ
+#random: is1=ᏄᎾ, ᏅᏯ, ᏣᎳᎩ ᎪᏪᎵ, ᏲᏁᎦ ᎪᏪᎵ, ᎫᎴ, ᏚᏯ
+#random: nis1=ᏄᎾ=ᏄᎾᎾ, ᏅᏯ=ᏅᏯᎾ, ᏣᎳᎩ ᎪᏪᎵ=ᏣᎳᎩᎾ ᎪᏪᎵ, ᏲᏁᎦ ᎪᏪᎵ=ᏲᏁᎦᎾ ᎪᏪᎵ, ᎫᎴ=ᏧᎴᎾ, ᏚᏯ=ᏚᏯᎾ
+#random: nx1=ᏄᎾ=ᏄᎾᎾ, ᏅᏯ=ᏅᏯᎾ, ᏣᎳᎩ ᎪᏪᎵ=ᏣᎳᎩᎾ ᎪᏪᎵ
+#random: nx2=ᏲᏁᎦ ᎪᏪᎵ=ᏲᏁᎦᎾ ᎪᏪᎵ, ᎫᎴ=ᏧᎴᎾ, ᏚᏯ=ᏚᏯᎾ
+#random: ip1=ᏄᎾ, ᏅᏯ, ᏗᎪᏪᎵ, ᎫᎴ, ᏚᏯ
+#random: gb1=ᎣᏍᏓ, ᎤᏲᎢ
+#random: gb2=ᎣᏍᏓ, ᎤᏲᎢ
+#random: gb3=ᎣᏍᏓ, ᎤᏲᎢ
+#random: gbvs1=ᎣᏍᏓ=ᎤᏲᎢ, ᎤᏲᎢ=ᎣᏍᏓ
+#☺←→↺
+#-ᏍᎪ, -Ꮝ, -Ꮷ, -Ꮚ, -Ꮎ, -Ꮂ, 
+#random: Ꮝ=ᏍᎪ, Ꮝ
+
+[Ꭰ] <gbvs1> <ax1>. <=gbvs1> <ax2>.	[Ꭰ→Ꭱ] <ax1><Ꮝ> <gbvs1>? 	[Ꭱ→Ꭰ] ᎥᎥ, <ax1> <gbvs1>.
+[Ꭰ] <gbvs1> <ax1>. <=gbvs1> <ax2>.	[Ꭰ→Ꭱ] <ax2><Ꮝ> <=gbvs1>?	[Ꭱ→Ꭰ] ᎥᎥ, <ax2> <=gbvs1>.
+[Ꭰ] <gbvs1> <ax1>. <=gbvs1> <ax2>.	[Ꭰ→Ꭱ] <ax2><Ꮝ> <gbvs1>? 	[Ꭱ→Ꭰ] ᎥᏝ, Ꮭ <ax2> <gbvs1> ᏱᎩ.
+[Ꭰ] <=gbvs1> <ax1>. <gbvs1> <ax2>.	[Ꭰ→Ꭱ] <ax1><Ꮝ> <gbvs1>? 	[Ꭱ→Ꭰ] ᎥᏝ, Ꮭ <ax1> <gbvs1> ᏱᎩ.
+
+[Ꭰ] <=gbvs1> <ax1>. <gbvs1> <ax2>.	[Ꭰ→Ꭱ] ᎥᎥ, <ax1>Ꮷ <=gbvs1>?	[Ꭱ→Ꭰ] ᎥᎥ, <ax1> <=gbvs1>.
+[Ꭰ] <=gbvs1> <ax1>. <gbvs1> <ax2>.	[Ꭰ→Ꭱ] ᎥᎥ, <ax2>Ꮷ <gbvs1>?	[Ꭱ→Ꭰ] ᎥᎥ, <ax2> <gbvs1>.
+[Ꭰ] <=gbvs1> <ax1>. <gbvs1> <ax2>.	[Ꭰ→Ꭱ] ᎥᎥ, <ax1>Ꮷ <gbvs1>?	[Ꭱ→Ꭰ] ᎥᏝ, Ꮭ <ax1> <gbvs1> ᏱᎩ.
+[Ꭰ] <=gbvs1> <ax1>. <gbvs1> <ax2>.	[Ꭰ→Ꭱ] ᎥᎥ, <ax2>Ꮷ <=gbvs1>?	[Ꭱ→Ꭰ] ᎥᏝ, Ꮭ <ax2> <=gbvs1> ᏱᎩ.
+
+[Ꭰ] <gbvs1> <ax1>. <=gbvs1> <ax2>.	[Ꭰ→Ꭱ] <ax1>Ꮚ<Ꮝ> <gbvs1>?	[Ꭱ→Ꭰ] ᎥᎥ, <ax1>Ꮚ <gbvs1>.
+[Ꭰ] <gbvs1> <ax1>. <=gbvs1> <ax2>.	[Ꭰ→Ꭱ] <ax2>Ꮚ<Ꮝ> <=gbvs1>?	[Ꭱ→Ꭰ] ᎥᎥ, <ax2>Ꮚ <=gbvs1>.
+[Ꭰ] <gbvs1> <ax1>. <=gbvs1> <ax2>.	[Ꭰ→Ꭱ] ᎥᎥ, <ax1>ᏊᏧ <gbvs1>?	[Ꭱ→Ꭰ] ᎥᎥ, <ax1>Ꮚ <gbvs1>.
+[Ꭰ] <gbvs1> <ax1>. <=gbvs1> <ax2>.	[Ꭰ→Ꭱ] ᎥᎥ, <ax2>ᏊᏧ <=gbvs1>?	[Ꭱ→Ꭰ] ᎥᎥ, <ax2>Ꮚ <=gbvs1>.
+
+[Ꭰ] <gbvs1> <ax1>. <gbvs1> <ax2>.	[Ꭰ→Ꭱ] <ax1>Ꮚ<Ꮝ> <gbvs1>?	[Ꭱ→Ꭰ] ᎥᏝ, <ax1> <gbvs1> ᎠᎴ <ax2> <gbvs1>.
+[Ꭰ] <gbvs1> <ax1>. <gbvs1> <ax2>.	[Ꭰ→Ꭱ] ᎥᎥ, <ax1>ᏊᏧ <gbvs1>?	[Ꭱ→Ꭰ] ᎥᏝ, <ax1> <gbvs1> ᎠᎴ <ax2> <gbvs1>.
+
+[Ꭰ] <gb1> <ax1>. <gb2> <ax2>.	[Ꭰ→Ꭱ] <ax2> <gb2>.	[Ꭱ→Ꭰ] <ax1>Ꮎ?	[Ꭰ→Ꭱ] <ax1> <gb1>.
+#[Ꭰ] <gb1> <ax1>. <gb2> <ax2>.	[Ꭰ→Ꭱ] <ax1> <gb2>.	[Ꭱ→Ꭰ] <ax2>Ꮎ?	[Ꭰ→Ꭱ] <ax2> <gb1>.
+[Ꭰ] <gb1> <nx1>. <gb2> <nx2>.	[Ꭰ→Ꭱ] <nx2> <gb2>.	[Ꭱ→Ꭰ] <=nx1>?	[Ꭰ→Ꭱ] <nx1> <gb1>.
+#[Ꭰ] <gb1> <nx1>. <gb2> <nx2>.	[Ꭰ→Ꭱ] <nx1> <gb2>.	[Ꭱ→Ꭰ] <=nx2>?	[Ꭰ→Ꭱ] <nx2> <gb1>.
+
+#ᎣᏍᏓ [o⁴sda] “Good.”
+#ᎤᏲᎢ [u²yo⁴ɂi] “Bad.”
+#ᎥᎥ [v²v] “Yes.”
+#ᎥᏍᎩᎩ? [v¹sgị²gi?] “Really?”
+#ᎥᏝ, Ꮭ [vtla, vhla, tla, hla] “No.”
+#ᎰᏩ [họ²wa] “Okay. Alright. Sure.”
+#Ꮒ! [ni!] “Look at that!”
+#ᏣᎳᎩ [jạ²lạ²gi] “Cherokee.”
+#ᏩᏙ [wạ²do] “Thanks.”
+#ᏲᏁᎦ, ᏴᏭᏁᎦ [yo³ne²ga, yv³wụ³ne²ga] “English.”
+
+#ᎦᏙ ᎤᏍᏗ [gạ²do² u⁴sdi] “Which one?”
+#ᎯᎳ ᎢᎦ [hị²la⁴ i²³ga⁴] “How many?”
+#ᎯᎳ ᎢᏯᏂ [hị²la⁴ ị²yạ³ni] “How many?”
+
+#ᏌᏊ [sa¹gwu⁴] “One.”
+#ᏔᎵ [tạɂ³li] “Two.”
+#ᎠᏂᏔᎵ [a²nị²tạɂ³li] “Two.”
+#ᏦᎢ [jọ²ɂi] “Three.”
+#ᎠᏂᏦᎢ [a²nị²jọ²ɂi] “Three.”
+#ᏅᎩ [nvh²gi] “Four.”
+#ᎯᏍᎩ [hị²sgi] “Five.”
+#ᏑᏓᎵ [su²³dạ³li] “Six.”
+#ᎦᎵᏉᎩ [gahl²gwo²³gi] “Seven.”
+
+#ᎠᎪᏩᏘᎭ [a¹gowh²tị³ha] “He sees him or it.”
+#ᎠᏂᎪᏩᏘᎭ [a¹nị²gowh²tị³ha] “They see him or it.”
+#ᏓᎪᏩᏘᎭ [da¹gowh²tị³ha] “He sees them.”
+#ᏓᏂᎪᏩᏘᎭ [da¹nị²gowh²tị³ha] “They see them.”
+#ᏥᎪᏩᏘᎭ [ji²gowh²tị³ha] “I see him.”
+#Ꮵ̣ᎪᏩᏘᎭ [jị²gowh²tị³ha] “I see it.”
+#ᎦᏥᎪᏩᏘᎭ [ga²ji²gowh²tị³ha] “I see them-animate.”
+#ᏕᏥ̣ᎪᏩᏘᎭ [de²jị²gowh²tị³ha] “I see them-inanimate.”
+#ᎦᎯᎪᏩᏘᎭ [ga²hi²gowh²tị³ha] “You see them-animate.”
+#ᏕᎯ̣ᎪᏩᏘᎭ [de²hị²gowh²tị³ha] “You see them-inanimate.”
+
+#ᎠᎴ, ᏃᎴ [ạ²le, nọ²le] “And. Or.”
+#ᎠᎭᏂ, ᎠᏂ [ạ³hạ²ni, ạ³hni] “Here.”
+#ᎤᎿ [u¹hna⁴] “There.”
+#ᎠᎨᏯ [ạ²ge²³hya] “A woman.”
+#ᎠᏂᎨᏯ [ạ²ni²ge²³hya] “Women.”
+#ᎠᏍᎦᏯ [ạ²sgạ²ya] “A man.”
+#ᎠᏂᏍᎦᏯ [ạ²ni²sgạ²ya] “Men.”
+#ᎦᏙ ᏧᏍᏗ [gạ²do² ju⁴sdi] “Which ones?”
+#ᎦᏙ ᎤᎾᏍᏗ [gạ²do² un⁴sdi] “Which ones?”
+
+#ᎩᏟ [gi²hli] “A dog. Dogs.”
+#ᏄᎾ [nu²³na] “A potato. Potatoes.”
+#ᏅᏯ [nv¹ya] “A rock. Rocks.”
+#ᏪᏌ [we²³sa] “A cat. Cats.”
+
+#ᎠᏴ, ᎠᏯ [ạ²yv, ạ²ya] “I. We.”
+#ᎢᎾ [i⁴na] “Far.”
+#ᎥᏍᎩᎾ [v¹sgị²na] “He. She. They. That. Those.” 
+#ᎥᏍᎩ [v¹sgị] - Alternate pronunciation.
+#ᏍᎩᎾ [sgị²na] - Alternate pronunciation.
+#ᎾᏍᎩ [na¹sgi] - Alternate pronunciation.
+#ᎯᎠ, ᎯᎢ [hị²ɂa, hị²ɂi] “He. She. They. This. These.”
+#Ꮎ [na] “That, Those”
+#ᎾᎥ [nạ²ɂv] “Near. Ꮯlose.”
+#ᏂᎯ [nị²hi] “You. You two. You all.”
+#
+

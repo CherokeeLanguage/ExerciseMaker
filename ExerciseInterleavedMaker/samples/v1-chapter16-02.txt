@@ -1,0 +1,115 @@
+#pragma: setsize=8 layout=Enumerate depth=1 random maxsets=3 only-reversed
+#note: Translate each into English.
+# translate into English
+# maxsets=6
+#☹☺←→↺
+#-ᏍᎪ, -Ꮝ, -Ꮷ, -Ꮚ, -Ꮎ, -Ꮂ, 
+#random: Ꮝ=Ꮝ, ᏍᎪ
+
+#random: ics=ᎢᏤᎢᏳᏍᏗ=green, ᎤᏁᎦ=white, ᎤᏬᏗᎨ=brown, ᎩᎦᎨ=red, ᎩᎨ=red, ᎬᎿᎨ=black, ᎬᏂᎨ=black, ᏌᎪᏂᎨ=blue, ᏓᎭᎵᎨ=purple, ᏓᎶᏂᎨ=yellow
+#random: acs=ᎢᏤᎢᏳᏍᏗ=green, ᎤᏁᎦ=white, ᎤᏬᏗᎨ=brown, ᎠᎩᎦᎨ=red, ᎠᎩᎨ=red, ᎠᎬᎿᎨ=black, ᎠᎬᏂᎨ=black, ᎠᏌᎪᏂᎨ=blue, ᎠᏓᎭᎵᎨ=purple, ᎠᏓᎶᏂᎨ=yellow
+#random: icp=ᏗᏤᎢᏳᏍᏗ=green, ᏧᏁᎦ=white, ᏧᏬᏗᎨ=brown, ᏗᎩᎦᎨ=red, ᏗᎩᎨ=red, ᏗᎬᎿᎨ=black, ᏗᎬᏂᎨ=black, ᏗᏌᎪᏂᎨ=blue, ᏗᏓᎭᎵᎨ=purple, ᏗᏓᎶᏂᎨ=yellow
+#random: acp=ᎠᏂᏤᎢᏳᏍᏗ=green, ᎤᏂᏁᎦ=white, ᏧᏃᏗᎨ=brown, ᎠᏂᎩᎦᎨ=red, ᎠᏂᎩᎨ=red, ᎠᏂᎬᎿᎨ=black, ᎠᏂᎬᏂᎨ=black, ᎠᏂᏌᎪᏂᎨ=blue, ᎠᏂᏓᎭᎵᎨ=purple, ᎠᏂᏓᎶᏂᎨ=yellow
+
+#random: something=ᎪᎱᏍᏗ=something, ᎪᏍᏗ=something
+#random: somethings=ᎪᎱᏍᏗ=somethings, ᎪᏍᏗ=somethings
+#random: things=ᎪᎱᏍᏗ=things, ᎪᏍᏗ=things
+
+#random: peops=ᎠᏣᎳᎩ=Cherokee person, ᎠᏴᏫ=person, ᎠᏴᏫᏯᎢ=Native American, ᎠᏧᏣ=boy, ᎠᎨᏳᏣ=girl, ᎠᏍᎦᏯ=man, ᎠᎨᏯ=woman
+
+#ᎠᎪᏩᏘᎭ [a¹gowh²tị³ha] “He sees him or it.”
+#ᎯᎪᏩᏘᎭ [hi²gowh²tị³ha] “You see him.”
+<peops> <anims> ᎠᎪᏩᏘᎭ.	The <=peops> sees a <=anims>.
+<peops> ᏥᎪᏩᏘᎭ.	I see a <=peops>.
+<peops> ᎯᎪᏩᏘᎭ.	You see a <=peops>.
+
+#Ꮝ
+<peops><Ꮝ> <anims> ᎠᎪᏩᏘᎭ?	Does the <=peops> sees a <=anims>?
+<peops><Ꮝ> ᏥᎪᏩᏘᎭ?	Do I see a <=peops>?
+<peops><Ꮝ> ᎯᎪᏩᏘᎭ?	Do you see a <=peops>?
+
+#random: gbis=ᎣᏍᏓ=good, ᎤᏲ=bad
+#random: gbas=ᎣᏍᏓ=good, ᎤᏲ=bad
+#random: peopp=ᎠᏂᎩᎵᏏ=English people, ᎠᏂᏲᏁᎦ=white people, ᎠᏂᏣᎳᎩ=Cherokee people, ᎠᏂᏴᏫ=people, ᎠᏂᏧᏣ=boys, ᎠᏂᎨᏳᏣ=girls, ᎠᏂᏍᎦᏯ=men, ᎠᏂᎨᏯ=women, ᎠᏂᏴᏫᏯᎢ=Native Americans
+
+#ᎠᎪᏩᏘᎭ [a¹gowh²tị³ha] “He sees him or it.”
+#ᎠᏂᎪᏩᏘᎭ [a¹nị²gowh²tị³ha] “They see him or it.”
+#ᎯᎪᏩᏘᎭ [hi²gowh²tị³ha] “You see him.”
+<peops> <gbas> <anims> ᎠᎪᏩᏘᎭ.	The <=peops> sees a <=gbas> <=anims>.
+<peopp> <gbas> <anims> ᎠᏂᎪᏩᏘᎭ.	The <=peopp> see a <=gbas> <=anims>.
+<gbas> <peops> ᏥᎪᏩᏘᎭ.	I see a <=gbas> <=peops>.
+<gbas> <peops> ᎯᎪᏩᏘᎭ.	You see a <=gbas> <=peops>.
+
+<gbas><Ꮝ> <peops> ᏥᎪᏩᏘᎭ?	Do I see a <=gbas> <=peops>?
+<gbas><Ꮝ> <peops> ᎯᎪᏩᏘᎭ?	Do you see a <=gbas> <=peops>?
+
+#random: anims=ᏲᎾ=bear, ᏐᏈᎵ=horse, ᏌᎶᎵ=squirrel, ᏩᏯ=wolf, ᏩᎭᏯ=wolf, ᏥᏍᏚ=rabbit, ᎠᎭᏫ=deer, ᎠᏫ=deer, ᏪᏌ=cat, ᎩᏟ=dog
+#random: inanims=ᏡᎬ=tree, ᏌᏛᏗ=trap, ᎪᏪᎵ=paper, ᏅᏯ=rock, ᏄᎾ=potato
+
+#ᎠᎪᏩᏘᎭ [a¹gowh²tị³ha] “He sees him or it.”
+#ᎠᏂᎪᏩᏘᎭ [a¹nị²gowh²tị³ha] “They see him or it.”
+#ᎯᎪᏩᏘᎭ [hi²gowh²tị³ha] “You see him.”
+<gbas> <anims> ᏥᎪᏩᏘᎭ.	I see a <=gbas> <=anims>.
+<gbas> <anims> ᎯᎪᏩᏘᎭ.	You see a <=gbas> <=anims>.
+<acs> <anims> ᏥᎪᏩᏘᎭ.	I see a <=acs> <=anims>.
+<acs> <anims> ᎯᎪᏩᏘᎭ.	You see a <=acs> <=anims>.
+
+<gbas><Ꮝ> <anims> ᏥᎪᏩᏘᎭ?	Do I see a <=gbas> <=anims>?
+<gbas><Ꮝ> <anims> ᎯᎪᏩᏘᎭ?	Do you see a <=gbas> <=anims>?
+<acs><Ꮝ> <anims> ᏥᎪᏩᏘᎭ?	Do I see a <=acs> <=anims>?
+<acs><Ꮝ> <anims> ᎯᎪᏩᏘᎭ?	Do you see a <=acs> <=anims>?
+
+<acs>Ꮎ <anims> ᏥᎪᏩᏘᎭ?	What about me seeing a <=acs> <=anims>?
+<acs>Ꮎ <anims> ᎯᎪᏩᏘᎭ?	What about you seeing a <=acs> <=anims>?
+
+#ᎠᎪᏩᏘᎭ [a¹gowh²tị³ha] “He sees him or it.”
+#ᎠᏂᎪᏩᏘᎭ [a¹nị²gowh²tị³ha] “They see him or it.”
+#Ꭿ̣ᎪᏩᏘᎭ [hị²gowh²tị³ha] “You see it.”
+<peops> <ics> <inanims> ᎠᎪᏩᏘᎭ.	The <=peops> sees a <=ics> <=inanims>.
+<peopp> <ics> <inanims> ᎠᏂᎪᏩᏘᎭ.	The <=peopp> see a <=ics> <=inanims>.
+<ics> <inanims> Ꮵ̣ᎪᏩᏘᎭ.	I see a <=ics> <=inanims>.
+<ics> <inanims> Ꭿ̣ᎪᏩᏘᎭ.	You see a <=ics> <=inanims>.
+
+<something> <ics> Ꮵ̣ᎪᏩᏘᎭ.	I see <=something> <=ics>.
+<something> <ics> Ꭿ̣ᎪᏩᏘᎭ.	You see <=something> <=ics>.
+
+<something><Ꮝ> <ics> Ꮵ̣ᎪᏩᏘᎭ?	Do I see <=something> <=ics>?
+<something><Ꮝ> <ics> Ꭿ̣ᎪᏩᏘᎭ?	Do you see <=something> <=ics>?
+
+<ics> <inanims>Ꮚ Ꮵ̣ᎪᏩᏘᎭ.	I see just a <=ics> <=inanims>.
+<ics> <inanims>Ꮚ Ꭿ̣ᎪᏩᏘᎭ.	You see just a <=ics> <=inanims>.
+
+#random: animp=ᏲᎾ=bears, ᏐᏈᎵ=horses, ᏌᎶᎵ=squirrels, ᏩᏯ=wolves, ᏩᎭᏯ=wolves, ᏥᏍᏚ=rabbits, ᎠᎭᏫ=deer, ᎠᏫ=deer, ᏪᏌ=cats, ᎩᏟ=dogs
+#random: inanimp=ᏕᏡᎬ=trees, ᏗᏌᏛᏗ=traps, ᏗᎪᏪᎵ=papers, ᎫᎴ=acorns, ᏅᏯ=rocks, ᏄᎾ=potatoes
+#random: gbip=ᏦᏍᏓ=good, ᏧᏲ=bad
+#random: gbap=ᎠᏃᏍᏓ=good, ᎤᏂᏲ=bad
+
+#ᏓᎪᏩᏘᎭ [da¹gowh²tị³ha] “He sees them.”
+#ᏓᏂᎪᏩᏘᎭ [da¹nị²gowh²tị³ha] “They see them.”
+#ᎦᏥᎪᏩᏘᎭ [ga²ji²gowh²tị³ha] “I see them-animate.”
+#ᎦᎯᎪᏩᏘᎭ [ga²hi²gowh²tị³ha] “You see them-animate.”
+
+<peops> <gbap> <peopp> ᏓᎪᏩᏘᎭ.	The <=peops> sees <=gbap> <=peopp>.
+<peops> <acp> <animp> ᏓᎪᏩᏘᎭ.	The <=peops> sees <=acp> <=animp>.
+
+<peopp> <gbap> <animp> ᏓᏂᎪᏩᏘᎭ.	The <=peopp> see <=gbap> <=animp>.
+<peopp> <acp> <animp> ᏓᏂᎪᏩᏘᎭ.	The <=peopp> see <=acp> <=animp>.
+
+<gbap> <peopp> ᎦᏥᎪᏩᏘᎭ.	I see <=gbap> <=peopp>.
+<acp> <animp> ᎦᏥᎪᏩᏘᎭ.	You see <=acp> <=animp>.
+
+#ᏓᎪᏩᏘᎭ [da¹gowh²tị³ha] “He sees them.”
+#ᏓᏂᎪᏩᏘᎭ [da¹nị²gowh²tị³ha] “They see them.”
+#ᏕᏥ̣ᎪᏩᏘᎭ [de²jị²gowh²tị³ha] “I see them-inanimate.”
+#ᏕᎯ̣ᎪᏩᏘᎭ [de²hị²gowh²tị³ha] “You see them-inanimate.”
+
+<peops> <icp> <inanimp> ᏓᎪᏩᏘᎭ.	The <=peops> sees <=icp> <=inanimp>.
+<peops> <icp> <inanimp> ᏓᎪᏩᏘᎭ.	The <=peops> sees <=icp> <=inanimp>.
+
+<peopp> <icp> <inanimp> ᏓᏂᎪᏩᏘᎭ.	The <=peopp> see <=icp> <=inanimp>.
+<peopp> <icp> <inanimp> ᏓᏂᎪᏩᏘᎭ.	The <=peopp> see <=icp> <=inanimp>.
+
+<icp> <inanimp> ᏕᏥ̣ᎪᏩᏘᎭ.	I see <=icp> <=inanimp>.
+<icp> <inanimp> ᏕᎯ̣ᎪᏩᏘᎭ.	You see <=icp> <=inanimp>.
+
+

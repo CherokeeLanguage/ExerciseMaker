@@ -1,0 +1,12 @@
+#pragma: setsize=9 layout=Enumerate depth=6
+#random: e=ᏲᏁᎦ, ᏴᏭᏁᎦ
+#random: n=Ꮭ, ᎥᏝ
+#random: pain=cactus, fire
+#random: hello=Shake hands with each other, Wave hello to each other, Bow slightly to each other
+
+ᎣᏏᏲ	<hello> while saying “ᎣᏏᏲ”.
+ᎠᏲ 	Each person should tap the <pain> then say “ᎠᏲ!” and shake their hand as if injured.
+Ꮒ, <e>	Point to the English paper and say “Ꮒ! <e>!”
+Ꮒ, ᏣᎳᎩ	Point to the Cherokee paper and say “Ꮒ! ᏣᎳᎩ!”
+ᏩᏙ, ᎰᏩ, ᎥᏍᎩᎩ?	Pass the gift back and forth. The person receiving it should say “ᎥᏍᎩᎩ? ᏩᏙ!”. The person giving the gift should then respond with “ᎰᏩ!”.
+<n>, ᎥᎥ, ᎤᏲᎢ, ᎣᏍᏓ	Pass the gift back and forth. The person to receive it should indicate they don't want it and say “<n>!”. The person giving the gift should then say “ᎥᏍᎩᎩ? ᎤᏲᎢ!”. The person receiving the gift should then say “Ꭳ… ᎰᏩ, ᎥᎥ.”. The gift should then be passed.

@@ -1,0 +1,157 @@
+#pragma: setsize=8 layout=Enumerate depth=1 maxsets=8 random
+#☺←→↺
+#-ᏍᎪ, -Ꮝ, -Ꮷ, -Ꮚ, -Ꮎ, -Ꮂ, 
+
+#random: Ꮝ=ᏍᎪ, Ꮝ
+#random: gb1=ᎣᏍᏓ=good, ᎤᏲᎢ=bad
+#random: gb2=ᎣᏍᏓ=good, ᎤᏲᎢ=bad, ᎰᏩ=alright
+<gb2><Ꮝ>?	Is it <=gb2>?
+<gb2>Ꮷ?	It is <=gb2>, right?
+<gb1>Ꮎ?	What about it being <=gb1>?
+<gb1>Ꮚ<Ꮝ>?	Is it just <=gb1>?
+<gb1>ᏊᏧ?	It is just <=gb1>, right?
+<gb1>Ꮂ?	But for it being <=gb1>?
+<gb1>ᎾᎲ?	But what about it being <=gb1>?
+
+#random: n1=ᏣᎳᎩ=Cherokee, ᏲᏁᎦ=English, ᏴᏭᏁᎦ=English
+<n1><Ꮝ>?	Is it <=n1>?
+<n1>Ꮷ?	It is <=n1>, right?
+<n1>Ꮎ?  	What about it being <=n1>?
+<n1>Ꮚ<Ꮝ>?	Is it just <=n1>?
+<n1>ᏊᏧ?	It is just <=n1>, right?
+<n1>Ꮂ?  	But for it being <=n1>?
+<n1>ᎾᎲ? 	But what about it being <=n1>?
+
+#random: as1=ᎠᎨᏯ=woman, ᎠᏍᎦᏯ=man, ᎩᏟ=dog, ᏪᏌ=cat, ᎠᏫ=deer, ᎠᎭᏫ=deer, ᏩᎭᏯ=wolf, ᏩᏯ=wolf, ᏥᏍᏚ=rabbit
+ᎦᏙ <as1>? <gb1><Ꮝ>? 	Which <=as1>? Is it the <=gb1> one?
+
+#random: ip1=ᏄᎾ=potatoes, ᏅᏯ=rocks, ᎫᎴ=acorns, ᏚᏯ=beans
+#random: ci1=ᏔᎵ=two, ᏦᎢ=three, ᏅᎩ=four, ᎯᏍᎩ=five, ᏑᏓᎵ=six, ᎦᎵᏉᎩ=seven
+#ᎯᎳ ᎢᎦ [hị²la⁴ i²³ga⁴] “How many?”
+ᎯᎳ ᎢᎦ <ip1>? <ci1>Ꮷ?	How many <=ip1>? It is <=ci1>, right?
+ᎯᎳ ᎢᎦ <ip1>? <ci1><Ꮝ>?	How many <=ip1>? Is it <=ci1>?
+
+#random: ap1=ᎠᏂᎨᏯ=women, ᎠᏂᏍᎦᏯ=men, ᎩᏟ=dogs, ᏪᏌ=cats, ᎠᏫ=deer, ᎠᎭᏫ=deer, ᏩᏯ=wolves, ᏩᎭᏯ=wolves, ᏥᏍᏚ=rabbits
+#random: ca1=ᎠᏂᏔᎵ=two, ᎠᏂᏦᎢ=three, ᏅᎩ=four, ᎯᏍᎩ=five, ᏑᏓᎵ=six, ᎦᎵᏉᎩ=seven
+#ᎯᎳ ᎢᏯᏂ [hị²la⁴ ị²yạ³ni] “How many?”
+ᎯᎳ ᎢᏯᏂ <ap1>? <ca1>Ꮷ?	How many <=ap1>? It is <=ca1>, right?
+ᎯᎳ ᎢᏯᏂ <ap1>? <ca1><Ꮝ>?	How many <=ap1>? Is it <=ca1>?
+
+#-ᏍᎪ, -Ꮝ, -Ꮷ, -Ꮚ, -Ꮎ, -Ꮂ
+#random: hu1=ᎠᎨᏯ=woman, ᎠᏍᎦᏯ=man
+#random: xn1=ᎩᏟ=dog, ᏪᏌ=cat, ᏩᎭᏯ=wolf, ᏩᏯ=wolf, ᎠᏫ=deer, ᎠᎭᏫ=deer, ᏥᏍᏚ=rabbit, ᏙᏯ=beaver, ᏄᎾ=potato, ᏅᏯ=rock, ᎪᏪᎵ=paper, ᎫᎴ=acorn, ᏚᏯ=bean
+#random: in1=ᏄᎾ=potato, ᏅᏯ=rock, ᎪᏪᎵ=paper, ᎫᎴ=acorn, ᏚᏯ=bean
+
+<hu1> ᎠᎪᏘᎭ.     	The <=hu1> sees it.
+<in1> ᎠᎪᏘᎭ.     	He or she sees the <=in1>.
+<hu1><Ꮝ> ᎠᎪᏘᎭ?  	Does the <=hu1> see it?
+<in1><Ꮝ> ᎠᎪᏘᎭ?  	Does he or she see the <=in1>?
+
+<hu1> <xn1> ᎠᎪᏘᎭ.	The <=hu1> sees the <=xn1>.
+<hu1><Ꮝ> <xn1> ᎠᎪᏘᎭ?	Does the <=hu1> see the <=xn1>?
+<hu1>Ꮷ <xn1> ᎠᎪᏘᎭ?	The <=hu1> sees the <=xn1>, right?
+<hu1>Ꮚ <xn1> ᎠᎪᏘᎭ.	Only the <=hu1> sees the <=xn1>.
+<hu1> <xn1>Ꮚ ᎠᎪᏘᎭ.	The <=hu1> sees only the <=xn1>.
+<hu1> <xn1> ᎠᎪᏘᎭᏊ.	The <=hu1> is only seeing the <=xn1>.
+<hu1>Ꮚ<Ꮝ> <xn1> ᎠᎪᏘᎭ?	Is only the <=hu1> seeing the <=xn1>?
+<hu1><Ꮝ> <xn1>Ꮚ ᎠᎪᏘᎭ?	Is the <=hu1> seeing only the <=xn1>?
+<hu1><Ꮝ> <xn1> ᎠᎪᏘᎭᏊ?	Is the <=hu1> only seeing the <=xn1>?
+
+#random: hup1=ᎠᏂᎨᏯ=women, ᎠᏂᏍᎦᏯ=men
+<hup1> ᎠᏂᎪᏘᎭ.     	The <=hup1> see it.
+<in1> ᎠᏂᎪᏘᎭ.     	They see the <=in1>.
+<hup1><Ꮝ> ᎠᏂᎪᏘᎭ?  	Do the <=hup1> see it?
+<in1><Ꮝ> ᎠᏂᎪᏘᎭ?  	Do they see the <=in1>?
+
+<hup1> <xn1> ᎠᏂᎪᏘᎭ.	The <=hup1> see the <=xn1>.
+<hup1><Ꮝ> <xn1> ᎠᏂᎪᏘᎭ?	Do the <=hup1> see the <=xn1>?
+<hup1>Ꮷ <xn1> ᎠᏂᎪᏘᎭ?	The <=hup1> see the <=xn1>, right?
+<hup1>Ꮚ <xn1> ᎠᏂᎪᏘᎭ.	Only the <=hup1> see the <=xn1>.
+<hup1> <xn1>Ꮚ ᎠᏂᎪᏘᎭ.	The <=hup1> see only the <=xn1>.
+<hup1> <xn1> ᎠᏂᎪᏘᎭᏊ.	The <=hup1> are only seeing the <=xn1>.
+<hup1>Ꮚ<Ꮝ> <xn1> ᎠᏂᎪᏘᎭ?	Are only the <=hup1> seeing the <=xn1>?
+<hup1><Ꮝ> <xn1>Ꮚ ᎠᏂᎪᏘᎭ?	Are the <=hup1> seeing only the <=xn1>?
+<hup1><Ꮝ> <xn1> ᎠᏂᎪᏘᎭᏊ?	Are the <=hup1> only seeing the <=xn1>?
+
+#ᏓᎪᏩᏘᎭ [da¹gowh²tị³ha] “He sees them.”
+#random: xnp1=ᎩᏟ=dogs, ᏪᏌ=cats, ᏩᎭᏯ=wolves, ᏩᏯ=wolves, ᎠᏫ=deer, ᎠᎭᏫ=deer, ᏥᏍᏚ=rabbits, ᏙᏯ=beaver, ᏄᎾ=potatoes, ᏅᏯ=rocks, ᏗᎪᏪᎵ=papers, ᎫᎴ=acorns, ᏚᏯ=beans
+#random: inp1=ᏄᎾ=potatoes, ᏅᏯ=rocks, ᏗᎪᏪᎵ=papers, ᎫᎴ=acorns, ᏚᏯ=beans
+<hu1> ᏓᎪᏘᎭ.     	The <=hu1> see them.
+<inp1> ᏓᎪᏘᎭ.     	He or she sees the <=inp1>.
+<hu1><Ꮝ> ᏓᎪᏘᎭ?  	Does the <=hu1> see them?
+<inp1><Ꮝ> ᏓᎪᏘᎭ?  	Does he or she see the <=inp1>?
+
+<hu1> <xnp1> ᏓᎪᏘᎭ.	The <=hu1> sees the <=xnp1>.
+<hu1><Ꮝ> <xnp1> ᏓᎪᏘᎭ?	Does the <=hu1> see the <=xnp1>?
+<hu1>Ꮷ <xnp1> ᏓᎪᏘᎭ?	The <=hu1> sees the <=xnp1>, right?
+<hu1>Ꮚ <xnp1> ᏓᎪᏘᎭ.	Only the <=hu1> sees the <=xnp1>.
+<hu1> <xnp1>Ꮚ ᏓᎪᏘᎭ.	The <=hu1> sees only the <=xnp1>.
+<hu1> <xnp1> ᏓᎪᏘᎭᏊ.	The <=hu1> is only seeing the <=xnp1>.
+<hu1>Ꮚ<Ꮝ> <xnp1> ᏓᎪᏘᎭ?	Is only the <=hu1> seeing the <=xnp1>?
+<hu1><Ꮝ> <xnp1>Ꮚ ᏓᎪᏘᎭ?	Is the <=hu1> seeing only the <=xnp1>?
+<hu1><Ꮝ> <xnp1> ᏓᎪᏘᎭᏊ?	Is the <=hu1> only seeing the <=xnp1>?
+
+
+#ᏓᏂᎪᏩᏘᎭ [da¹nị²gowh²tị³ha] “They see them.”
+<hup1> ᏓᏂᎪᏘᎭ.     	The <=hup1> see them.
+<inp1> ᏓᏂᎪᏘᎭ.     	They see the <=inp1>.
+<hup1><Ꮝ> ᏓᏂᎪᏘᎭ?  	Do the <=hup1> see them?
+<inp1><Ꮝ> ᏓᏂᎪᏘᎭ?  	Do they see the <=inp1>?
+
+<hup1> <xnp1> ᏓᏂᎪᏘᎭ.	The <=hup1> see the <=xnp1>.
+<hup1><Ꮝ> <xnp1> ᏓᏂᎪᏘᎭ?	Do the <=hup1> see the <=xnp1>?
+<hup1>Ꮷ <xnp1> ᏓᏂᎪᏘᎭ?	The <=hup1> see the <=xnp1>, right?
+<hup1>Ꮚ <xnp1> ᏓᏂᎪᏘᎭ.	Only the <=hup1> see the <=xnp1>.
+<hup1> <xnp1>Ꮚ ᏓᏂᎪᏘᎭ.	The <=hup1> see only the <=xnp1>.
+<hup1> <xnp1> ᏓᏂᎪᏘᎭᏊ.	The <=hup1> are only seeing the <=xnp1>.
+<hup1>Ꮚ<Ꮝ> <xnp1> ᏓᏂᎪᏘᎭ?	Are only the <=hup1> seeing the <=xnp1>?
+<hup1><Ꮝ> <xnp1>Ꮚ ᏓᏂᎪᏘᎭ?	Are the <=hup1> seeing only the <=xnp1>?
+<hup1><Ꮝ> <xnp1> ᏓᏂᎪᏘᎭᏊ?	Are the <=hup1> only seeing the <=xnp1>?
+
+#ᏥᎪᏩᏘᎭ [ji²gowh²tị³ha] “I see him.”, Ꮵ̣ᎪᏩᏘᎭ [jị²gowh²tị³ha] “I see it.”
+#random: an1=ᎩᏟ=dog, ᏪᏌ=cat, ᏩᎭᏯ=wolf, ᏩᏯ=wolf, ᎠᏫ=deer, ᎠᎭᏫ=deer, ᏥᏍᏚ=rabbit, ᏙᏯ=beaver, ᎠᎨᏯ=woman, ᎠᏍᎦᏯ=man
+
+ᏥᎪᏘᎭ.     	I see him/her.
+Ꮵ̣ᎪᏘᎭ.     	I see it.
+ᏥᎪᏘᎭ<Ꮝ>?     	Do I see him/her?
+Ꮵ̣ᎪᏘᎭ<Ꮝ>?     	Do I see it?
+<an1> ᏥᎪᏘᎭ.	I see the <=an1>.
+<in1> Ꮵ̣ᎪᏘᎭ.    	I see the <=in1>.
+<an1><Ꮝ> ᏥᎪᏘᎭ? 	Do I see a <=an1>?
+<in1><Ꮝ> Ꮵ̣ᎪᏘᎭ? 	Do I see the <=in1>?
+<an1>Ꮚ ᏥᎪᏘᎭ.	I see only the <=an1>.
+<in1>Ꮚ Ꮵ̣ᎪᏘᎭ.	I see only the <=in1>.
+ᎠᏴᏊ <an1> ᏥᎪᏘᎭ.	Only I am seeing the <=an1>.
+<an1> ᏥᎪᏘᎭᏊ.	I am only seeing the <=an1>.
+<in1> Ꮵ̣ᎪᏘᎭᏊ.	I am only seeing the <=in1>.
+
+#ᎯᎪᏩᏘᎭ [hi²gowh²tị³ha] “You see him/her.”, Ꭿ̣ᎪᏩᏘᎭ [hị²gowh²tị³ha] “You see it.”
+ᎯᎪᏘᎭ.     	You see him/her.
+Ꭿ̣ᎪᏘᎭ.     	You see it.
+ᎯᎪᏘᎭ<Ꮝ>?     	Do you see him/her?
+Ꭿ̣ᎪᏘᎭ<Ꮝ>?     	Do you see it?
+<an1> ᎯᎪᏘᎭ.	You see the <=an1>.
+<in1> Ꭿ̣ᎪᏘᎭ.    	You see the <=in1>.
+<an1><Ꮝ> ᎯᎪᏘᎭ? 	Do you see a <=an1>?
+<in1><Ꮝ> Ꭿ̣ᎪᏘᎭ? 	Do you see the <=in1>?
+ᏂᎯᏊ <an1> ᎯᎪᏘᎭ.	Only you are seeing the <=an1>.
+
+#random: anp1=ᎩᏟ=dogs, ᏪᏌ=cats, ᏩᎭᏯ=wolves, ᏩᏯ=wolves, ᎠᏫ=deer, ᎠᎭᏫ=deer, ᏥᏍᏚ=rabbits, ᏙᏯ=beavers, ᎠᎨᏯ=women, ᎠᏍᎦᏯ=men
+
+#ᎦᏥᎪᏩᏘᎭ [ga²ji²gowh²tị³ha] “I see them-animate.”, ᏕᏥ̣ᎪᏩᏘᎭ [de²jị²gowh²tị³ha] “I see them-inanimate.”
+ᎦᏥᎪᏘᎭ.     	I see them.
+ᏕᏥ̣ᎪᏘᎭ.     	I see them.
+ᎦᏥᎪᏘᎭ<Ꮝ>?     	Do I see them?
+ᏕᏥ̣ᎪᏘᎭ<Ꮝ>?     	Do I see them?
+<anp1> ᎦᏥᎪᏘᎭ.	I see the <=anp1>.
+<inp1> ᏕᏥ̣ᎪᏘᎭ.  	I see the <=inp1>.
+
+
+#ᎦᎯᎪᏩᏘᎭ [ga²hi²gowh²tị³ha] “You see them-animate.”, ᏕᎯ̣ᎪᏩᏘᎭ [de²hị²gowh²tị³ha] “You see them-inanimate.”
+ᎦᎯᎪᏘᎭ.          	You see them.
+ᏕᎯ̣ᎪᏘᎭ.          	You see them.
+ᎦᎯᎪᏘᎭ<Ꮝ>?       	Do you see them?
+ᏕᎯ̣ᎪᏘᎭ<Ꮝ>?       	Do you see them?
+<anp1><Ꮝ> ᎦᎯᎪᏘᎭ?	Do you see the <=anp1>?
+<inp1><Ꮝ> ᏕᎯ̣ᎪᏘᎭ?	Do you see the <=inp1>?
+
