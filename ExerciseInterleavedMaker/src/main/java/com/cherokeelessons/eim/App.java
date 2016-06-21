@@ -100,7 +100,7 @@ public class App implements Runnable {
 		StringBuilder lyx_challenges_response = new StringBuilder();
 
 		if (pragma.getMaxsets()>0) {
-			lists=lists.subList(0, pragma.getMaxsets());
+			lists=lists.subList(0, Math.min(lists.size(), pragma.getMaxsets()));
 		}
 		
 		lyx_challenges_only.append(LyxTemplate.docStart);
