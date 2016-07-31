@@ -5,8 +5,6 @@ package com.cherokeelessons.eim;
 
 import java.awt.EventQueue;
 
-import com.newsrx.gui.MainWindow;
-
 /**
  * @author mjoyner
  *

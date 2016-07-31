@@ -44,7 +44,7 @@ dependencies {
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.9.1'
 	// http://mvnrepository.com/artifact/org.apache.commons/commons-collections4
 	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
-	compile "com.github.michael-newsrx:SimpleTextUi:-SNAPSHOT"
+	compile "com.github.michael-joyner:SimpleTextUi:-SNAPSHOT"
 }
  
 sourceSets {
