@@ -4,6 +4,10 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
+apply plugin: 'maven'
+
+group = "com.github.michael-joyner"
+version = '20160513'
 
 sourceCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
@@ -12,8 +16,6 @@ def RTJAR = '/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar';
 if (new File(RTJAR).exists()) {
 	compileJava.options.bootClasspath=RTJAR
 }
-
-version = '20160513'
 
 tasks.eclipseWtp.dependsOn(cleanEclipseWtp)
 
@@ -28,6 +30,7 @@ task fatjar(type: FatCapsule) {
 
 repositories {
     jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 configurations {
@@ -41,7 +44,7 @@ dependencies {
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.9.1'
 	// http://mvnrepository.com/artifact/org.apache.commons/commons-collections4
 	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
-	compile project(":SimpleTextUi")
+	compile "com.github.michael-newsrx:SimpleTextUi:-SNAPSHOT"
 }
  
 sourceSets {
@@ -57,6 +60,32 @@ sourceSets {
 task "create-dirs" << {
 	sourceSets*.java.srcDirs*.each { it.mkdirs() }
 	sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+sourceSets {
+  main {
+    compileClasspath += configurations.provided
+  }
+  test {
+    compileClasspath += configurations.provided
+    runtimeClasspath += configurations.provided
+  }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	javadoc.failOnError=false
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
 
 eclipseJdt << {
@@ -91,7 +120,7 @@ project.afterEvaluate {
 eclipse {
 	project {
 		name = 'ExerciseInterleavedMaker'
-		natures 'org.springsource.ide.eclipse.gradle.core.nature'
+		natures 'org.eclipse.buildship.core.gradleprojectnature'
 		referencedProjects 'SimpleTextUi'
 	}
 
