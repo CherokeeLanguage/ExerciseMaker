@@ -4,6 +4,9 @@
 package com.cherokeelessons.eim;
 
 import java.awt.EventQueue;
+import java.io.IOException;
+
+import com.cherokeelessons.gui.MainWindow;
 
 /**
  * @author mjoyner
@@ -13,8 +16,9 @@ public class Main {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		MainWindow.Config config=new MainWindow.Config() {
 			@Override
 			public String getApptitle() {
