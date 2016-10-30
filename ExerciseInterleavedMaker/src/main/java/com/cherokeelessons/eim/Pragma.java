@@ -96,4 +96,13 @@ public class Pragma {
 	public void setSep(String sep) {
 		this.sep = sep;
 	}
+
+	private boolean forPictures=false;
+	public boolean isForPictures() {
+		return forPictures;
+	}
+
+	public void setForPictures(boolean forPictures) {
+		this.forPictures=forPictures;
+	}
 }

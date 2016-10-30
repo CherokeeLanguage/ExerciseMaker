@@ -38,7 +38,7 @@ public class ChallengeResponsePair {
 		None, Enumerate, Plain, Itemize, SingleLine
 	}
 
-	public String toLyxCode(ResponseLayout challengesOnly) {
+	public String toLyxCode(ResponseLayout layout) {
 		StringBuilder sb = new StringBuilder();
 		String tmp_challenge = challenge != null ? challenge : "";
 		String tmp_response = response != null ? response : "";
@@ -46,7 +46,7 @@ public class ChallengeResponsePair {
 		sb.append("\\begin_layout Enumerate\n");
 		sb.append(tmp_challenge);
 		
-		switch(challengesOnly) {
+		switch(layout) {
 		case SingleLine:
 			sb.append("\n"+sep+"\n ");
 			sb.append(tmp_response);

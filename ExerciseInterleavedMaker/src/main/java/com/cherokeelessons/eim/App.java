@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import javax.swing.filechooser.FileSystemView;
 
@@ -21,6 +22,7 @@ import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang3.StringUtils;
 
 import com.cherokeelessons.eim.ChallengeResponsePair.ResponseLayout;
+import com.cherokeelessons.log.Log;
 import com.cherokeelessons.lyx.LyxTemplate;
 
 public class App implements Runnable {
@@ -28,6 +30,7 @@ public class App implements Runnable {
 	private String outFolder;
 	private Map<String, ReplacementSet> randomReplacements = new HashMap<>();
 	private Pragma pragma = null;
+	private final Logger log = Log.getLogger(this);
 
 	public App(String[] args) {
 	}
@@ -81,6 +84,22 @@ public class App implements Runnable {
 				Collections.shuffle(challenges, rnd);
 			}
 			queued = createPimsleurStyledOutput(challenges, pragma.getDepth());
+			if (pragma.isForPictures()) {
+				List<Integer> numbers = new ArrayList<>();
+				for (int i=0; i<queued.size(); i++) {
+					numbers.add(i+1);
+				}
+				Random rnd = new Random(challenges.size() + numbers.size());
+				Collections.shuffle(numbers, rnd);
+				log.info("NUMBERS: "+numbers.toString());
+				for (int i=0; i<queued.size(); i++) {
+					ChallengeResponsePair q=queued.get(i);
+					if (!StringUtils.isBlank(q.response)){
+						q.response+=q.sep+" ";
+					}
+					q.response+=("["+numbers.get(i)+"]");
+				}
+			}
 			writeChallengeResponsePairsTxt(outFile, queued);
 			writeChallengeResponsePairsLyx(lyxBaseFile, queued);
 		}
@@ -152,6 +171,9 @@ public class App implements Runnable {
 				continue;
 			}
 			if (StringUtils.strip(line).startsWith("#pragma:")) {
+				if (line.contains("forpictures")){
+					pragma.setForPictures(true);
+				}
 				if (line.contains("include-reversed")){
 					pragma.setIncludeRerversed(true);
 				}
@@ -219,7 +241,7 @@ public class App implements Runnable {
 				continue;
 			}
 
-			if (!line.contains("\t")) {
+			if (!line.contains("\t") && !pragma.isForPictures()) {
 				System.err.println("BAD LINE (no tabs found): " + line);
 				continue;
 			}
