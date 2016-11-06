@@ -43,6 +43,9 @@ public class ChallengeResponsePair {
 		String tmp_challenge = challenge != null ? challenge : "";
 		String tmp_response = response != null ? response : "";
 
+		tmp_challenge=tmp_challenge.trim().replaceAll("\\s+", " ");
+		tmp_response=tmp_response.trim().replaceAll("\\s+", " ");;
+		
 		sb.append("\\begin_layout Enumerate\n");
 		sb.append(tmp_challenge);
 		
