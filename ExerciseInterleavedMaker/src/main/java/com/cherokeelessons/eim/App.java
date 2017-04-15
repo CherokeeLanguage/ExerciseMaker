@@ -2,6 +2,7 @@ package com.cherokeelessons.eim;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.LineIterator;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.cherokeelessons.eim.ChallengeResponsePair.ResponseLayout;
@@ -58,8 +60,10 @@ public class App implements Runnable {
 			pragma=new Pragma();
 			System.out.println("File: "+file.getName());
 			File outFile = new File(outFolder, file.getName());
+			File debugOutFile = new File(outFolder, file.getName()+".debug.txt");
 			String lyxBaseFile = new File(outFolder, FilenameUtils.getBaseName(file.getName())).getAbsolutePath();
 			challenges = parseChallengeResponsePairs(file);
+			List<ChallengeResponsePair> debugChallenges = new ArrayList<>(challenges);
 			System.out.println("\tLoaded "+challenges.size()+" challenges.");
 			if (pragma.isIncludeRerversed()||pragma.isOnlyRerversed()){
 				List<ChallengeResponsePair> tmp=new ArrayList<>();
@@ -100,9 +104,22 @@ public class App implements Runnable {
 					q.response+=("["+numbers.get(i)+"]");
 				}
 			}
+			writeDebugResponsePairsTxt(debugOutFile, debugChallenges);
 			writeChallengeResponsePairsTxt(outFile, queued);
 			writeChallengeResponsePairsLyx(lyxBaseFile, queued);
 		}
+	}
+
+	private void writeDebugResponsePairsTxt(File outFile, List<ChallengeResponsePair> queued) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		for (ChallengeResponsePair c: queued) {
+			sb.append(c.challenge.replace("\t", "\\t").replace("\n", "\\n"));
+			sb.append("\n");
+			sb.append(c.response.replace("\t", "\\t").replace("\n", "\\n"));
+			sb.append("\n");
+			sb.append("\n");
+		}
+		FileUtils.write(outFile, sb.toString(), StandardCharsets.UTF_8);		
 	}
 
 	private void writeChallengeResponsePairsLyx(String lyxBaseFile, List<ChallengeResponsePair> queued)
@@ -344,6 +361,8 @@ public class App implements Runnable {
 		return queued;
 	}
 
+	
+	
 	private void writeChallengeResponsePairsTxt(File outFile, List<ChallengeResponsePair> queued) throws IOException {
 		FileUtils.writeLines(outFile, queued);
 	}

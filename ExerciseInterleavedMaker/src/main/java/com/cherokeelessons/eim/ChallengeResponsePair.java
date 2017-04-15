@@ -1,5 +1,7 @@
 package com.cherokeelessons.eim;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ChallengeResponsePair {
 	public ChallengeResponsePair() {
 	}
@@ -43,24 +45,25 @@ public class ChallengeResponsePair {
 		String tmp_challenge = challenge != null ? challenge : "";
 		String tmp_response = response != null ? response : "";
 
-		tmp_challenge=tmp_challenge.trim().replaceAll("\\s+", " ");
-		tmp_response=tmp_response.trim().replaceAll("\\s+", " ");;
+		tmp_challenge=tmp_challenge.trim();
+		tmp_response=tmp_response.trim();
 		
 		sb.append("\\begin_layout Enumerate\n");
-		sb.append(tmp_challenge);
+		sb.append(StringUtils.normalizeSpace(tmp_challenge));
 		
 		switch(layout) {
 		case SingleLine:
 			sb.append("\n"+sep+"\n ");
-			sb.append(tmp_response);
+			sb.append(StringUtils.normalizeSpace(tmp_response));
 			sb.append("\n\\end_layout\n\n");
 			break;
 		case Enumerate:
 			sb.append("\n\\end_layout\n\n");
 			sb.append("\\begin_deeper\n");
+			int c=0;
 			for (String t: tmp_response.split("\t")) {
 				sb.append("\\begin_layout Enumerate\n");
-				sb.append(t);
+				sb.append(StringUtils.normalizeSpace(t));
 				sb.append("\n\\end_layout\n\n");
 			}
 			sb.append("\\end_deeper\n");
@@ -70,7 +73,7 @@ public class ChallengeResponsePair {
 			sb.append("\\begin_deeper\n");
 			for (String t: tmp_response.split("\t")) {
 				sb.append("\\begin_layout Itemize\n");
-				sb.append(t);
+				sb.append(StringUtils.normalizeSpace(t));
 				sb.append("\n\\end_layout\n\n");
 			}
 			sb.append("\\end_deeper\n");
@@ -82,7 +85,7 @@ public class ChallengeResponsePair {
 			sb.append("\n\\end_layout\n\n");
 			sb.append("\\begin_deeper\n");
 			sb.append("\\begin_layout Standard\n");
-			sb.append(tmp_response);
+			sb.append(StringUtils.normalizeSpace(tmp_response));
 			sb.append("\n\\end_layout\n\n");
 			sb.append("\\end_deeper\n");
 			break;
