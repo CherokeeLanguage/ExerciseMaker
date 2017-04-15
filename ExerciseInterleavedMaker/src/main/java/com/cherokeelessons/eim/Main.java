@@ -9,7 +9,7 @@ import java.io.IOException;
 import com.cherokeelessons.gui.MainWindow;
 
 /**
- * @author mjoyner
+ * @author muksihs
  *
  */
 public class Main {
