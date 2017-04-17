@@ -37,8 +37,8 @@ public class LyxTemplate {
 			+ "\\use_non_tex_fonts true\n" //
 			+ "\\font_sc false\n" //
 			+ "\\font_osf true\n" //
-			+ "\\font_sf_scale 100\n" //
-			+ "\\font_tt_scale 100\n" //
+			+ "\\font_sf_scale 100 100\n" //
+			+ "\\font_tt_scale 100 100\n" //
 			+ "\\graphics none\n" //
 			+ "\\default_output_format pdf4\n" //
 			+ "\\output_sync 1\n" //
