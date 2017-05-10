@@ -88,6 +88,13 @@ public class App implements Runnable {
 				Collections.shuffle(challenges, rnd);
 			}
 			queued = createPimsleurStyledOutput(challenges, pragma.getDepth());
+			//space fix and puncation fix
+			queued.forEach(q->{
+				q.challenge=StringUtils.strip(StringUtils.normalizeSpace(q.challenge));
+				q.response=StringUtils.strip(StringUtils.normalizeSpace(q.response));
+				q.challenge=q.challenge.replaceAll("\\s+([.!?])", "$1");
+				q.response=q.response.replaceAll("\\s+([.!?])", "$1");
+			});
 			if (pragma.isForPictures()) {
 				List<Integer> numbers = new ArrayList<>();
 				for (int i=0; i<queued.size(); i++) {
