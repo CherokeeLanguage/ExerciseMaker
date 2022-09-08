@@ -1,35 +1,28 @@
 plugins {
-  id "us.kirchmeier.capsule" version "1.0.2"
+    id "idea"
+    id "java"
+    id 'com.github.johnrengelman.shadow'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse-wtp'
-apply plugin: 'maven'
-
-group = "com.github.michael-joyner"
-version = '20160513'
-
-sourceCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
-
-def RTJAR = '/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar';
-if (new File(RTJAR).exists()) {
-	compileJava.options.bootClasspath=RTJAR
+compileJava.options.release = 17
+compileTestJava.options.encoding = 'UTF-8'
+compileTestJava.options.release = 17
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.withSourcesJar()
+jar {
+    from sourceSets.main.allSource
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
-tasks.eclipseWtp.dependsOn(cleanEclipseWtp)
+jar.manifest.attributes "Main-Class": 'com.cherokeelessons.eim.Main'
 
-task fatjar(type: FatCapsule) {
-	//-Dfile.encoding=UTF-8
-  	archiveName 'ExerciseInterleavedMaker.jar'
-	applicationClass 'com.cherokeelessons.eim.Main'
-	capsuleManifest {
-    	jvmArgs = ['-Dfile.encoding=UTF-8']
-	}
-}
+shadowJar.archiveFileName = 'ExerciseMaker.jar'
+shadowJar.mergeServiceFiles()
 
 repositories {
-    jcenter()
+    google()
+	mavenCentral()
     maven { url "https://jitpack.io" }
 }
 
@@ -38,108 +31,15 @@ configurations {
 }
 
 dependencies {
-	compile 'org.apache.commons:commons-lang3:+'
-	compile 'commons-io:commons-io:+'
-	// http://mvnrepository.com/artifact/org.jsoup/jsoup
-	compile group: 'org.jsoup', name: 'jsoup', version: '1.9.1'
-	// http://mvnrepository.com/artifact/org.apache.commons/commons-collections4
-	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
-	compile "com.github.michael-joyner:SimpleTextUi:-SNAPSHOT"
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation project(":SimpleTextUi")
 }
  
-sourceSets {
-  main {
-    compileClasspath += configurations.provided
-  }
-  test {
-    compileClasspath += configurations.provided
-    runtimeClasspath += configurations.provided
-  }
-}
-
-task "create-dirs" << {
+task "create-dirs" {
+    doLast {
 	sourceSets*.java.srcDirs*.each { it.mkdirs() }
 	sourceSets*.resources.srcDirs*.each { it.mkdirs() }
-}
-
-sourceSets {
-  main {
-    compileClasspath += configurations.provided
-  }
-  test {
-    compileClasspath += configurations.provided
-    runtimeClasspath += configurations.provided
-  }
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	javadoc.failOnError=false
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
-eclipseJdt << {
-    File f = file('.settings/org.eclipse.core.resources.prefs')
-    f.write('eclipse.preferences.version=1\n')
-    f.append('encoding/<project>=utf-8')
-    f = file('.settings/org.eclipse.core.runtime.prefs')
-    f.write('eclipse.preferences.version=1\n')
-    f.append('line.separator=\\n\n')
-}
-
-project.afterEvaluate {
-	// use jre lib matching version used by project, not the workspace default
-	if (sourceCompatibility != null) {
-		def target = project.sourceCompatibility.toString()
-		def containerPrefix = "org.eclipse.jdt.launching.JRE_CONTAINER"
-		def containerSuffix
-		if (target =~ /1.[4-5]/) {
-			containerSuffix = '/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-' + target
-		} else if (target =~ /1.[6-8]/) {
-			containerSuffix = '/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-' + target
-		}
-		if (containerSuffix != null) {
-			project.eclipse.classpath {
-				containers.removeAll { it.startsWith(containerPrefix) }
-				containers.add(containerPrefix + containerSuffix)
-			}
-		}
-	}
-}
-
-eclipse {
-	project {
-		name = 'ExerciseInterleavedMaker'
-		natures 'org.eclipse.buildship.core.gradleprojectnature'
-		referencedProjects 'SimpleTextUi'
-	}
-
-	classpath {
-		plusConfigurations += [configurations.provided]
-		downloadSources = true
-		downloadJavadoc = true
-	}
-
-	jdt {
-		sourceCompatibility=1.8
-		targetCompatibility=1.8
-	}
-
-	wtp {
-		facet {
-			facets = []
-			facet name: 'jst.java', version: '1.8'
-			/*facet name: 'jst.web', version: '3.0'*/
-		}
-	}
-}
+}}
